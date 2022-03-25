@@ -37,14 +37,14 @@ dependencies:
   mobx: ^2.0.6+1
   flutter_mobx: ^2.0.4
   flutter_modular: ^4.5.0
-  mocktail: ^0.0.1-dev.12
+  mocktail: ^0.3.0
   dartz: ^0.10.1
   equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mobx_codegen: ^2.0.5+2
+  # mobx_codegen: ^2.0.5+2
   build_runner: ^2.1.8
 
   # The "flutter_lints" package below contains a set of recommended lints to
