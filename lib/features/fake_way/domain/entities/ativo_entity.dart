@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:equatable/equatable.dart';
 import 'package:fake_way/features/fake_way/domain/entities/estabelecimento_entity.dart';
 
@@ -12,8 +10,8 @@ class Ativo extends Equatable {
   final String? tipoDescricao;
   final String? icone;
   final List<String>? sensores;
-  final Float latitude;
-  final Float longitude;
+  final double latitude;
+  final double longitude;
 
   const Ativo(
       {required this.estabelecimento,
