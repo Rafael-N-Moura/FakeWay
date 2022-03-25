@@ -15,7 +15,7 @@ class Ativo extends Equatable {
   final Float latitude;
   final Float longitude;
 
-  Ativo(
+  const Ativo(
       {required this.estabelecimento,
       required this.sensorId,
       required this.dispotividoId,
@@ -28,7 +28,6 @@ class Ativo extends Equatable {
       required this.longitude});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         estabelecimento,
         sensorId,
