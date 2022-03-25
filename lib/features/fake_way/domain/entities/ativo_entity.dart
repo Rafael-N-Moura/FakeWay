@@ -13,7 +13,7 @@ class Ativo extends Equatable {
   final double latitude;
   final double longitude;
 
-  Ativo(
+  const Ativo(
       {required this.estabelecimento,
       required this.sensorId,
       required this.dispotividoId,
