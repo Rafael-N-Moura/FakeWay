@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
+import 'package:fake_way/features/fake_way/domain/entities/coordenada_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
 
@@ -10,4 +11,5 @@ abstract class IAtivoRepository {
       int estabelecimentoId);
   Future<Either<Failure, void>> sendTemperatureData(Temperatura temperatura);
   Future<Either<Failure, void>> sendUmidadeData(Umidade umidade);
+  Future<Either<Failure, void>> sendCoordenadaData(Coordenada coordenada);
 }
