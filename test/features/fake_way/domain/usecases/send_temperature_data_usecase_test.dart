@@ -20,12 +20,15 @@ void main() {
   final tTemperature = Temperatura(
       dispositivoId: 1, sensorId: 1, data: tDateTime, temperatura: 1.0);
 
+  void tVoid;
+
   test('should call the repository with the right parameter', () async {
     when(() => repository.sendTemperatureData(tTemperature))
-        .thenAnswer((_) async => Right(void _r);
+        .thenAnswer((_) async => Right(tVoid));
+
     await usecase(tTemperature);
 
-    //verify(() => repository.sendTemperatureData(tTemperature)).called(1);
+    verify(() => repository.sendTemperatureData(tTemperature)).called(1);
   });
 
   test('should return a ServerFailure when don\'t succeed', () async {
