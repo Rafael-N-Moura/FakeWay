@@ -6,7 +6,7 @@ class Temperatura extends Equatable {
   final DateTime data;
   final double temperatura;
 
-  Temperatura(
+  const Temperatura(
       {required this.dispositivoId,
       required this.sensorId,
       required this.data,

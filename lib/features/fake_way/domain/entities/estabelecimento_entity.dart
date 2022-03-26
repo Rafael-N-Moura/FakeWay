@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
 
 class Estabelecimento extends Equatable {
   final int companyId;
