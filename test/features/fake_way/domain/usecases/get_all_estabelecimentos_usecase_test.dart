@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
-import 'package:fake_way/features/fake_way/domain/entities/estabelecimento_entity.dart';
 import 'package:fake_way/features/fake_way/domain/repositories/i_estabelecimento_repository.dart';
 import 'package:fake_way/features/fake_way/domain/usecases/get_all_estabelecimentos_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockEstabelecimentoRepository extends Mock
-    implements IEstabelecimentoRepository {}
+import '../../../../mocks/estabelecimento_repository_mock.dart';
+import '../../../../mocks/lista_de_estabelecimentos_mock.dart';
 
 void main() {
   late GetAllEstabelecimentosUsecase usecase;
@@ -19,29 +18,23 @@ void main() {
     usecase = GetAllEstabelecimentosUsecase(repository);
   });
 
-  const List<Estabelecimento> tListEstabelecimento = [
-    Estabelecimento(companyId: 1, companyName: "Estabelecimento Mock")
-  ];
-
-  final tNoParams = NoParams();
-
   test("should get a lista de estabelecimentos from the repository", () async {
     // Arrange
     when(() => repository.getAllEstabelecimentos())
         .thenAnswer((_) async => const Right(tListEstabelecimento));
     // Act
-    final result = await usecase(tNoParams);
+    final result = await usecase(NoParams());
     // Assert
     expect(result, const Right(tListEstabelecimento));
     verify(() => repository.getAllEstabelecimentos()).called(1);
   });
 
-  test("should return a ServerFailure when don\'t succeed", () async {
+  test("should return a ServerFailure when don't succeed", () async {
     // Arrange
     when(() => repository.getAllEstabelecimentos())
         .thenAnswer((_) async => Left(ServerFailure()));
     // Act
-    final result = await usecase(tNoParams);
+    final result = await usecase(NoParams());
     // Assert
     expect(result, Left(ServerFailure()));
     verify(() => repository.getAllEstabelecimentos()).called(1);

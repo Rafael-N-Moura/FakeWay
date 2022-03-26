@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/failures.dart';
-import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
-import 'package:fake_way/features/fake_way/domain/entities/estabelecimento_entity.dart';
 import 'package:fake_way/features/fake_way/domain/repositories/ativo_repository.dart';
 import 'package:fake_way/features/fake_way/domain/usecases/get_all_ativos_by_estabelecimento_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAtivoRepository extends Mock implements IAtivoRepository {}
+import '../../../../mocks/ativo_repository_mock.dart';
+import '../../../../mocks/estabelecimento_id_mock.dart';
+import '../../../../mocks/lista_de_ativos_mock.dart';
 
 void main() {
   late GetAllAtivosByEstabelecimentoUsecase usecase;
@@ -17,22 +17,6 @@ void main() {
     repository = MockAtivoRepository();
     usecase = GetAllAtivosByEstabelecimentoUsecase(repository);
   });
-
-  const int tEstabelecimentoId = 1;
-  const List<Ativo> tAtivosList = [
-    Ativo(
-        estabelecimento:
-            Estabelecimento(companyId: 1, companyName: 'companyName'),
-        sensorId: 1,
-        dispotividoId: 1,
-        nome: 'nome',
-        tipoId: 1,
-        tipoDescricao: 'descrição',
-        icone: 'icone',
-        sensores: ['sensores'],
-        latitude: 1.0,
-        longitude: 1.0),
-  ];
 
   test(
       'should get a list of ativos for a given estabelecimento id from the repository',
