@@ -1,12 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/failures.dart';
-import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
+import 'package:fake_way/core/usecases/usecase.dart';
 import 'package:fake_way/features/fake_way/domain/repositories/ativo_repository.dart';
 import 'package:fake_way/features/fake_way/domain/usecases/send_temperature_data_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAtivoRepository extends Mock implements IAtivoRepository {}
+import '../../../../mocks/ativo_repository_mock.dart';
+import '../../../../mocks/temperatura_entity_mock.dart';
 
 void main() {
   late SendTemperatureData usecase;
@@ -16,15 +17,10 @@ void main() {
     repository = MockAtivoRepository();
     usecase = SendTemperatureData(repository);
   });
-  final DateTime tDateTime = DateTime(2022, 03, 25);
-  final tTemperature = Temperatura(
-      dispositivoId: 1, sensorId: 1, data: tDateTime, temperatura: 1.0);
-
-  void tVoid;
 
   test('should call the repository with the right parameter', () async {
     when(() => repository.sendTemperatureData(tTemperature))
-        .thenAnswer((_) async => Right(tVoid));
+        .thenAnswer((_) async => Right(NoParams()));
 
     await usecase(tTemperature);
 
