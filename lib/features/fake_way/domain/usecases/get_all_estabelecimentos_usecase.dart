@@ -11,6 +11,6 @@ class GetAllEstabelecimentosUsecase
   GetAllEstabelecimentosUsecase(this.repository);
   @override
   Future<Either<Failure, List<Estabelecimento>>> call(NoParams params) async {
-    return repository.getAllEstabelecimentos();
+    return await repository.getAllEstabelecimentos();
   }
 }
