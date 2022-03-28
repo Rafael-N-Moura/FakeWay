@@ -33,6 +33,10 @@ void main() {
         .called(1);
   });
 
+  test('should call the datasource with the right Umidade param', () async {
+    
+  });
+
   test(
       "should return a server failure when the call to datasource is unsuccessful",
       () async {

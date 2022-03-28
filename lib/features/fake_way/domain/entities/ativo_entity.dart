@@ -10,8 +10,8 @@ class Ativo extends Equatable {
   final String? tipoDescricao;
   final String? icone;
   final List<String>? sensores;
-  final double latitude;
-  final double longitude;
+  final double? latitude;
+  final double? longitude;
 
   const Ativo(
       {required this.estabelecimento,
