@@ -1,5 +1,5 @@
 import 'package:fake_way/core/errors/exceptions.dart';
-import 'package:fake_way/features/fake_way/data/datasource/i_data_source.dart';
+import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/coordenada_entity.dart';

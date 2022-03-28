@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
-import 'package:fake_way/features/fake_way/data/datasource/i_data_source.dart';
+import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/fake_way/data/repositories/ativo_repository_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
