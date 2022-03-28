@@ -26,18 +26,34 @@ class AtivoRepositoryImplementation implements IAtivoRepository {
   }
 
   @override
-  Future<Either<Failure, NoParams>> sendCoordenadaData(Coordenada coordenada) {
-    throw UnimplementedError();
+  Future<Either<Failure, NoParams>> sendCoordenadaData(
+      Coordenada coordenada) async {
+    try {
+      await dataSource.sendCoordenadaData(coordenada);
+      return Right(NoParams());
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
   Future<Either<Failure, NoParams>> sendTemperatureData(
-      Temperatura temperatura) {
-    throw UnimplementedError();
+      Temperatura temperatura) async {
+    try {
+      await dataSource.sendTemperatureData(temperatura);
+      return Right(NoParams());
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, NoParams>> sendUmidadeData(Umidade umidade) {
-    throw UnimplementedError();
+  Future<Either<Failure, NoParams>> sendUmidadeData(Umidade umidade) async {
+    try {
+      await dataSource.sendUmidadeData(umidade);
+      return Right(NoParams());
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 }

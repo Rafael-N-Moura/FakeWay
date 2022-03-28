@@ -1,10 +1,10 @@
-import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
+import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
 import 'package:fake_way/features/fake_way/domain/entities/estabelecimento_entity.dart';
 
 import 'estabelecimento_id_mock.dart';
 
-const List<Ativo> tAtivosList = [
-  Ativo(
+const List<AtivoModel> tAtivosList = [
+  AtivoModel(
       estabelecimento: Estabelecimento(
           companyId: tEstabelecimentoId, companyName: 'companyName'),
       sensorId: 1,
