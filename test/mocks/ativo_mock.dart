@@ -12,9 +12,9 @@ const tAtivoJsonMock = """
       "typeId":1,
       "typeDescription":"tipoDescricao",
       "icon":"icone",
-      "sensors":['sensores'],
-      "latitude":1,
-      "longitude":1
+      "sensors":["sensores"],
+      "latitude":1.0,
+      "longitude":1.0
 }
 """;
 
@@ -27,5 +27,5 @@ const tAtivoMock = AtivoModel(
     tipoDescricao: "tipoDescricao",
     icone: "icone",
     sensores: ["sensores"],
-    latitude: 1,
-    longitude: 1);
+    latitude: 1.0,
+    longitude: 1.0);
