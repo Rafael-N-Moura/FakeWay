@@ -1,22 +1,47 @@
+import 'dart:convert';
+
+import 'package:fake_way/core/errors/exceptions.dart';
+import 'package:fake_way/core/http_client/http_client.dart';
 import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
-import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
-import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
-import 'package:fake_way/features/fake_way/domain/entities/coordenada_entity.dart';
-import 'package:fake_way/features/fake_way/data/models/estabelecimento_model.dart';
 import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
+import 'package:fake_way/features/fake_way/data/models/estabelecimento_model.dart';
+import 'package:fake_way/features/fake_way/domain/entities/coordenada_entity.dart';
+import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
+import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
 
 class DataSourceImplementation extends IDataSource {
+  final HttpClient client;
+  DataSourceImplementation(this.client);
+
   @override
   Future<List<AtivoModel>> getAllAtivosByEstabelecimento(
-      int estabelecimentoId) {
-    // TODO: implement getAllAtivosByEstabelecimento
-    throw UnimplementedError();
+      int estabelecimentoId) async {
+    final response =
+        await client.get('https://wayds.net:8081/fakeway/api/v1/Property');
+    if (response.statusCode == 200) {
+      Iterable list = jsonDecode(response.data);
+      List<AtivoModel> ativoList = list
+          .map((e) => AtivoModel.fromJson(e))
+          .where((e) => e.estabelecimento.companyId == estabelecimentoId)
+          .toList();
+      return ativoList;
+    } else {
+      throw ServerException();
+    }
   }
 
   @override
-  Future<List<EstabelecimentoModel>> getAllEstabelecimentos() {
-    // TODO: implement getAllEstabelecimentos
-    throw UnimplementedError();
+  Future<List<EstabelecimentoModel>> getAllEstabelecimentos() async {
+    final response =
+        await client.get('https://wayds.net:8081/fakeway/api/v1/Property');
+    if (response.statusCode == 200) {
+      Iterable list = jsonDecode(response.data);
+      List<EstabelecimentoModel> estabelecimentoList =
+          list.map((e) => EstabelecimentoModel.fromJson(e)).toSet().toList();
+      return estabelecimentoList;
+    } else {
+      throw ServerException();
+    }
   }
 
   @override

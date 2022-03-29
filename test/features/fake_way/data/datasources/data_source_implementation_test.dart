@@ -3,7 +3,9 @@ import 'package:fake_way/features/fake_way/data/datasources/data_source_implemen
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../mocks/estalecimento_json_mock.dart';
+import '../../../../mocks/json_mock.dart';
+import '../../../../mocks/lista_de_ativos_dois.dart';
+import '../../../../mocks/lista_de_estabelecimentos_mock.dart';
 
 class MockHttpClient extends Mock implements HttpClient {}
 
@@ -16,9 +18,11 @@ void main() {
     dataSource = DataSourceImplementation(client);
   });
 
+  const urlExpected = "https://wayds.net:8081/fakeway/api/v1/Property";
+
   sucessMock() {
     when(() => client.get(any())).thenAnswer(
-      (_) async => HttpAnswer(data: estabelecimentoJsonMock, statusCode: 200),
+      (_) async => HttpAnswer(data: jsonMock, statusCode: 200),
     );
   }
 
@@ -28,5 +32,21 @@ void main() {
     await dataSource.getAllEstabelecimentos();
 
     verify((() => client.get(urlExpected))).called(1);
+  });
+
+  test('should return a List of Estabelecimentos when is sucessful', () async {
+    sucessMock();
+
+    final result = await dataSource.getAllEstabelecimentos();
+
+    expect(result, tListEstabelecimento);
+  });
+
+  test('should return a List of Ativos when is sucessful', () async {
+    sucessMock();
+
+    final result = await dataSource.getAllAtivosByEstabelecimento(1);
+
+    expect(result, tAtivosList2);
   });
 }

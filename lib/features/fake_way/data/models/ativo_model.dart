@@ -36,7 +36,7 @@ class AtivoModel extends Ativo {
       tipoId: json['typeId'],
       tipoDescricao: json['typeDescription'],
       icone: json['icon'],
-      sensores: json['sensors'],
+      sensores: List<String>.from(json['sensors']),
       latitude: json['latitude'],
       longitude: json['longitude'],
     );
