@@ -8,6 +8,7 @@ import '../../../../mocks/json_mock.dart';
 import '../../../../mocks/lista_de_ativos_dois.dart';
 import '../../../../mocks/lista_de_estabelecimentos_mock.dart';
 import '../../../../mocks/temperatura_entity_mock.dart';
+import '../../../../mocks/umidade_entity_mock.dart';
 
 class MockHttpClient extends Mock implements HttpClient {}
 
@@ -25,6 +26,8 @@ void main() {
       "https://wayds.net:8081/fakeway/api/v1/Coordinate";
   const putTemperatureUrlExpected =
       "https://wayds.net:8081/fakeway/api/v1/Temperature";
+  const putUmidadeUrlExpected =
+      "https://wayds.net:8081/fakeway/api/v1/Humidity";
 
   sucessMock() {
     when(() => client.get(any())).thenAnswer(
@@ -82,5 +85,19 @@ void main() {
     // Assert
     verify(() => client.put(putTemperatureUrlExpected,
         body: tTemperatureModel.toMap())).called(1);
+  });
+
+  test("should call the Send Umidade Method with correct url ", () async {
+    // Arrange
+    when(() => client.put(any(), body: tUmidadeModel.toMap())).thenAnswer(
+      (_) async => HttpAnswer(data: tUmidadeModel.toMap(), statusCode: 200),
+    );
+
+    // Act
+    await dataSource.sendUmidadeData(tUmidadeModel);
+
+    // Assert
+    verify(() => client.put(putUmidadeUrlExpected, body: tUmidadeModel.toMap()))
+        .called(1);
   });
 }

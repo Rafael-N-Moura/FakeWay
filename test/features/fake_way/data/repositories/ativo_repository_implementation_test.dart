@@ -28,25 +28,25 @@ void main() {
     test(
         'Sucess case - should call the datasource with the right Umidade param',
         () async {
-      when(() => dataSource.sendUmidadeData(tUmidade))
+      when(() => dataSource.sendUmidadeData(tUmidadeModel))
           .thenAnswer((_) async => NoParams());
 
-      await repository.sendUmidadeData(tUmidade);
+      await repository.sendUmidadeData(tUmidadeModel);
 
-      verify(() => dataSource.sendUmidadeData(tUmidade)).called(1);
+      verify(() => dataSource.sendUmidadeData(tUmidadeModel)).called(1);
     });
 
     test(
         'Error case - should return a server failure when unable to send umidade data',
         () async {
-      when(() => dataSource.sendUmidadeData(tUmidade))
+      when(() => dataSource.sendUmidadeData(tUmidadeModel))
           .thenThrow(ServerException());
 
-      final result = await repository.sendUmidadeData(tUmidade);
+      final result = await repository.sendUmidadeData(tUmidadeModel);
 
       expect(result, Left(ServerFailure()));
 
-      verify(() => dataSource.sendUmidadeData(tUmidade)).called(1);
+      verify(() => dataSource.sendUmidadeData(tUmidadeModel)).called(1);
     });
 
     test(

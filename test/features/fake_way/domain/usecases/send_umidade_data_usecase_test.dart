@@ -20,23 +20,23 @@ void main() {
 
   test("should call the repository with the right parameter", () async {
     // Arrange
-    when(() => repository.sendUmidadeData(tUmidade))
+    when(() => repository.sendUmidadeData(tUmidadeModel))
         .thenAnswer((_) async => Right(NoParams()));
     // Act
-    final result = await usecase.call(tUmidade);
+    final result = await usecase.call(tUmidadeModel);
     // Assert
     expect(result, Right(NoParams()));
-    verify(() => repository.sendUmidadeData(tUmidade)).called(1);
+    verify(() => repository.sendUmidadeData(tUmidadeModel)).called(1);
   });
 
   test("should return a ServerFailure when don't succeed", () async {
     // Arrange
-    when(() => repository.sendUmidadeData(tUmidade))
+    when(() => repository.sendUmidadeData(tUmidadeModel))
         .thenAnswer((_) async => Left(ServerFailure()));
     // Act
-    final result = await usecase.call(tUmidade);
+    final result = await usecase.call(tUmidadeModel);
     // Assert
     expect(result, Left(ServerFailure()));
-    verify(() => repository.sendUmidadeData(tUmidade)).called(1);
+    verify(() => repository.sendUmidadeData(tUmidadeModel)).called(1);
   });
 }

@@ -6,7 +6,7 @@ import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
 import 'package:fake_way/features/fake_way/data/models/coordenata_model.dart';
 import 'package:fake_way/features/fake_way/data/models/estabelecimento_model.dart';
-import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
+import 'package:fake_way/features/fake_way/data/models/umidade_model.dart';
 
 import '../models/temperatura_model.dart';
 
@@ -68,8 +68,13 @@ class DataSourceImplementation extends IDataSource {
   }
 
   @override
-  Future sendUmidadeData(Umidade umidade) {
-    // TODO: implement sendUmidadeData
-    throw UnimplementedError();
+  Future sendUmidadeData(UmidadeModel umidade) async {
+    final data = umidade.toMap();
+    final response = await client
+        .put("https://wayds.net:8081/fakeway/api/v1/Humidity", body: data);
+    if (response.statusCode == 200) {
+    } else {
+      return ServerException();
+    }
   }
 }
