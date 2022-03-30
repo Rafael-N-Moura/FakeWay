@@ -1,3 +1,4 @@
+import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
 import 'package:fake_way/features/fake_way/data/datasources/data_source_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -73,6 +74,23 @@ void main() {
         body: tCoordenadaModel.toMap())).called(1);
   });
 
+  test("should throw a Server Exception when call the Send Coordenada Method",
+      () async {
+    // Arrange
+    when(() => client.put(any(), body: tCoordenadaModel.toMap())).thenAnswer(
+      (_) async => HttpAnswer(data: "Something is wrong..", statusCode: 400),
+    );
+
+    // Act
+    var result = await dataSource.sendCoordenadaData(tCoordenadaModel);
+
+    // Assert
+    expect(result, ServerException());
+
+    verify(() => client.put(putCoordenadaUrlExpected,
+        body: tCoordenadaModel.toMap())).called(1);
+  });
+
   test("should call the Send Temperatura Method with correct url ", () async {
     // Arrange
     when(() => client.put(any(), body: tTemperatureModel.toMap())).thenAnswer(
@@ -87,6 +105,23 @@ void main() {
         body: tTemperatureModel.toMap())).called(1);
   });
 
+  test("should throw a Server Exception when call the Send Temperature Method",
+      () async {
+    // Arrange
+    when(() => client.put(any(), body: tTemperatureModel.toMap())).thenAnswer(
+      (_) async => HttpAnswer(data: "Something is wrong..", statusCode: 400),
+    );
+
+    // Act
+    var result = await dataSource.sendTemperatureData(tTemperatureModel);
+
+    // Assert
+    expect(result, ServerException());
+
+    verify(() => client.put(putTemperatureUrlExpected,
+        body: tTemperatureModel.toMap())).called(1);
+  });
+
   test("should call the Send Umidade Method with correct url ", () async {
     // Arrange
     when(() => client.put(any(), body: tUmidadeModel.toMap())).thenAnswer(
@@ -97,6 +132,23 @@ void main() {
     await dataSource.sendUmidadeData(tUmidadeModel);
 
     // Assert
+    verify(() => client.put(putUmidadeUrlExpected, body: tUmidadeModel.toMap()))
+        .called(1);
+  });
+
+  test("should throw a Server Exception when call the Send Umidade Method",
+      () async {
+    // Arrange
+    when(() => client.put(any(), body: tUmidadeModel.toMap())).thenAnswer(
+      (_) async => HttpAnswer(data: "Something is wrong..", statusCode: 400),
+    );
+
+    // Act
+    var result = await dataSource.sendUmidadeData(tUmidadeModel);
+
+    // Assert
+    expect(result, ServerException());
+
     verify(() => client.put(putUmidadeUrlExpected, body: tUmidadeModel.toMap()))
         .called(1);
   });
