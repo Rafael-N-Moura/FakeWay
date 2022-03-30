@@ -4,8 +4,8 @@ import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
 import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
+import 'package:fake_way/features/fake_way/data/models/coordenata_model.dart';
 import 'package:fake_way/features/fake_way/data/models/estabelecimento_model.dart';
-import 'package:fake_way/features/fake_way/domain/entities/coordenada_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
 
@@ -45,9 +45,14 @@ class DataSourceImplementation extends IDataSource {
   }
 
   @override
-  Future sendCoordenadaData(Coordenada coordenada) {
-    // TODO: implement sendCoordenadaData
-    throw UnimplementedError();
+  Future sendCoordenadaData(CoordenadaModel coordenada) async {
+    final data = coordenada.toMap();
+    final response = await client
+        .put("https://wayds.net:8081/fakeway/api/v1/Coordinate", body: data);
+    if (response.statusCode == 200) {
+    } else {
+      return ServerException();
+    }
   }
 
   @override

@@ -52,25 +52,25 @@ void main() {
     test(
         'Sucess case - should call the datasource with the right Coordenada param',
         () async {
-      when(() => dataSource.sendCoordenadaData(tCoordenada))
+      when(() => dataSource.sendCoordenadaData(tCoordenadaModel))
           .thenAnswer((_) async => NoParams());
 
-      await repository.sendCoordenadaData(tCoordenada);
+      await repository.sendCoordenadaData(tCoordenadaModel);
 
-      verify(() => dataSource.sendCoordenadaData(tCoordenada)).called(1);
+      verify(() => dataSource.sendCoordenadaData(tCoordenadaModel)).called(1);
     });
 
     test(
         'Error case - should return a server failure when unable to send Coordenada data',
         () async {
-      when(() => dataSource.sendCoordenadaData(tCoordenada))
+      when(() => dataSource.sendCoordenadaData(tCoordenadaModel))
           .thenThrow(ServerException());
 
-      final result = await repository.sendCoordenadaData(tCoordenada);
+      final result = await repository.sendCoordenadaData(tCoordenadaModel);
 
       expect(result, Left(ServerFailure()));
 
-      verify(() => dataSource.sendCoordenadaData(tCoordenada)).called(1);
+      verify(() => dataSource.sendCoordenadaData(tCoordenadaModel)).called(1);
     });
 
     test(
@@ -85,7 +85,7 @@ void main() {
     });
 
     test(
-        'Error case - should return a server failure when unable to send Coordenada data',
+        'Error case - should return a server failure when unable to send Temperatura data',
         () async {
       when(() => dataSource.sendTemperatureData(tTemperature))
           .thenThrow(ServerException());

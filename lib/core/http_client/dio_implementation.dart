@@ -11,8 +11,17 @@ class DioImplementation extends HttpClient {
   }
 
   @override
-  Future<HttpAnswer> post(String url, {required Map<String, dynamic> body}) {
-    // TODO: implement post
+  Future<HttpAnswer> post(String url,
+      {required Map<String, dynamic> body}) async {
+    //final response = await client.post(url, data: body);
+    //return HttpAnswer(data: body, statusCode: response.statusCode);
     throw UnimplementedError();
+  }
+
+  @override
+  Future<HttpAnswer> put(String url,
+      {required Map<String, dynamic> body}) async {
+    final response = await client.put(url, data: body);
+    return HttpAnswer(data: body, statusCode: response.statusCode);
   }
 }

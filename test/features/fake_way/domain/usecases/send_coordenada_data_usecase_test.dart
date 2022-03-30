@@ -20,23 +20,23 @@ void main() {
 
   test("should call the repository with the right parameter", () async {
     // Arrange
-    when(() => repository.sendCoordenadaData(tCoordenada))
+    when(() => repository.sendCoordenadaData(tCoordenadaModel))
         .thenAnswer((_) async => Right(NoParams()));
     // Act
-    final result = await usecase.call(tCoordenada);
+    final result = await usecase.call(tCoordenadaModel);
     // Assert
     expect(result, Right(NoParams()));
-    verify(() => repository.sendCoordenadaData(tCoordenada)).called(1);
+    verify(() => repository.sendCoordenadaData(tCoordenadaModel)).called(1);
   });
 
   test("should return a ServerFailure when don't succeed", () async {
     // Arrange
-    when(() => repository.sendCoordenadaData(tCoordenada))
+    when(() => repository.sendCoordenadaData(tCoordenadaModel))
         .thenAnswer((_) async => Left(ServerFailure()));
     // Act
-    final result = await usecase.call(tCoordenada);
+    final result = await usecase.call(tCoordenadaModel);
     // Assert
     expect(result, Left(ServerFailure()));
-    verify(() => repository.sendCoordenadaData(tCoordenada)).called(1);
+    verify(() => repository.sendCoordenadaData(tCoordenadaModel)).called(1);
   });
 }

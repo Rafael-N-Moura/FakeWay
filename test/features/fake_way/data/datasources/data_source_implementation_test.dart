@@ -3,6 +3,7 @@ import 'package:fake_way/features/fake_way/data/datasources/data_source_implemen
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../mocks/coordenada_entity_mock.dart';
 import '../../../../mocks/json_mock.dart';
 import '../../../../mocks/lista_de_ativos_dois.dart';
 import '../../../../mocks/lista_de_estabelecimentos_mock.dart';
@@ -18,7 +19,9 @@ void main() {
     dataSource = DataSourceImplementation(client);
   });
 
-  const urlExpected = "https://wayds.net:8081/fakeway/api/v1/Property";
+  const getUrlExpected = "https://wayds.net:8081/fakeway/api/v1/Property";
+  const putCoordenadaUrlExpected =
+      "https://wayds.net:8081/fakeway/api/v1/Coordinate";
 
   sucessMock() {
     when(() => client.get(any())).thenAnswer(
@@ -31,7 +34,7 @@ void main() {
 
     await dataSource.getAllEstabelecimentos();
 
-    verify((() => client.get(urlExpected))).called(1);
+    verify((() => client.get(getUrlExpected))).called(1);
   });
 
   test('should return a List of Estabelecimentos when is sucessful', () async {
@@ -48,5 +51,18 @@ void main() {
     final result = await dataSource.getAllAtivosByEstabelecimento(1);
 
     expect(result, tAtivosList2);
+  });
+
+  test("should call the Coordenada Put Method with correct url ", () async {
+    // Arrange
+    when(() => client.put(any(), body: tCoordenadaModel.toMap())).thenAnswer(
+      (_) async => HttpAnswer(data: tCoordenadaModel.toMap(), statusCode: 200),
+    );
+    // Act
+    await dataSource.sendCoordenadaData(tCoordenadaModel);
+    // Assert
+
+    verify(() => client.put(putCoordenadaUrlExpected,
+        body: tCoordenadaModel.toMap())).called(1);
   });
 }
