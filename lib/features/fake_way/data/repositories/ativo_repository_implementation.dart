@@ -2,12 +2,13 @@ import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/fake_way/data/models/coordenata_model.dart';
 import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
-import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/features/fake_way/domain/repositories/ativo_repository.dart';
+
+import '../models/temperatura_model.dart';
 
 class AtivoRepositoryImplementation implements IAtivoRepository {
   final IDataSource dataSource;
@@ -38,7 +39,7 @@ class AtivoRepositoryImplementation implements IAtivoRepository {
 
   @override
   Future<Either<Failure, NoParams>> sendTemperatureData(
-      Temperatura temperatura) async {
+      TemperaturaModel temperatura) async {
     try {
       await dataSource.sendTemperatureData(temperatura);
       return Right(NoParams());

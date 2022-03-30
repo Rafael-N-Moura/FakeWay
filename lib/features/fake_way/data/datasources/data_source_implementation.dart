@@ -6,8 +6,9 @@ import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
 import 'package:fake_way/features/fake_way/data/models/coordenata_model.dart';
 import 'package:fake_way/features/fake_way/data/models/estabelecimento_model.dart';
-import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
 import 'package:fake_way/features/fake_way/domain/entities/umidade_entity.dart';
+
+import '../models/temperatura_model.dart';
 
 class DataSourceImplementation extends IDataSource {
   final HttpClient client;
@@ -56,9 +57,14 @@ class DataSourceImplementation extends IDataSource {
   }
 
   @override
-  Future sendTemperatureData(Temperatura temperatura) {
-    // TODO: implement sendTemperatureData
-    throw UnimplementedError();
+  Future sendTemperatureData(TemperaturaModel temperatura) async {
+    final data = temperatura.toMap();
+    final response = await client
+        .put("https://wayds.net:8081/fakeway/api/v1/Temperature", body: data);
+    if (response.statusCode == 200) {
+    } else {
+      return ServerException();
+    }
   }
 
   @override

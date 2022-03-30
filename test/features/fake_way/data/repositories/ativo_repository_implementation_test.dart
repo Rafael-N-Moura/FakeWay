@@ -76,25 +76,25 @@ void main() {
     test(
         'Sucess case - should call the datasource with the right Temperatura param',
         () async {
-      when(() => dataSource.sendTemperatureData(tTemperature))
+      when(() => dataSource.sendTemperatureData(tTemperatureModel))
           .thenAnswer((_) async => NoParams());
 
-      await repository.sendTemperatureData(tTemperature);
+      await repository.sendTemperatureData(tTemperatureModel);
 
-      verify(() => dataSource.sendTemperatureData(tTemperature)).called(1);
+      verify(() => dataSource.sendTemperatureData(tTemperatureModel)).called(1);
     });
 
     test(
         'Error case - should return a server failure when unable to send Temperatura data',
         () async {
-      when(() => dataSource.sendTemperatureData(tTemperature))
+      when(() => dataSource.sendTemperatureData(tTemperatureModel))
           .thenThrow(ServerException());
 
-      final result = await repository.sendTemperatureData(tTemperature);
+      final result = await repository.sendTemperatureData(tTemperatureModel);
 
       expect(result, Left(ServerFailure()));
 
-      verify(() => dataSource.sendTemperatureData(tTemperature)).called(1);
+      verify(() => dataSource.sendTemperatureData(tTemperatureModel)).called(1);
     });
   });
 

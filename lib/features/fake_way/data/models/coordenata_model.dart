@@ -30,7 +30,7 @@ class CoordenadaModel extends Coordenada {
   Map<String, dynamic> toMap() => {
         "deviceId": dispositivoId,
         "sensorId": sensorId,
-        "readAt": data.toString(),
+        "readAt": data.toIso8601String(),
         "latitude": latitude,
         "longitude": longitude,
         "speed": velocidade

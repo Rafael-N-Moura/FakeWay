@@ -19,22 +19,22 @@ void main() {
   });
 
   test('should call the repository with the right parameter', () async {
-    when(() => repository.sendTemperatureData(tTemperature))
+    when(() => repository.sendTemperatureData(tTemperatureModel))
         .thenAnswer((_) async => Right(NoParams()));
 
-    await usecase(tTemperature);
+    await usecase(tTemperatureModel);
 
-    verify(() => repository.sendTemperatureData(tTemperature)).called(1);
+    verify(() => repository.sendTemperatureData(tTemperatureModel)).called(1);
   });
 
   test('should return a ServerFailure when don\'t succeed', () async {
-    when(() => repository.sendTemperatureData(tTemperature))
+    when(() => repository.sendTemperatureData(tTemperatureModel))
         .thenAnswer((_) async => Left(ServerFailure()));
 
-    final result = await usecase(tTemperature);
+    final result = await usecase(tTemperatureModel);
 
     expect(result, Left(ServerFailure()));
 
-    verify(() => repository.sendTemperatureData(tTemperature)).called(1);
+    verify(() => repository.sendTemperatureData(tTemperatureModel)).called(1);
   });
 }
