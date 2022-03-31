@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fake_way/features/estabelecimento_feature/data/datasources/i_data_source.dart';
 
+import '../../../../core/endpoints/property_endpoint.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/http_client/http_client.dart';
 import '../models/estabelecimento_model.dart';
