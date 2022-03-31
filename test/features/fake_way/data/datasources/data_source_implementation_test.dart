@@ -36,6 +36,11 @@ void main() {
     );
   }
 
+  failureMock() {
+    when(() => client.get(any())).thenAnswer(
+        (invocation) async => HttpAnswer(data: 'data', statusCode: 800));
+  }
+
   test('should call the get method with correct url', () async {
     sucessMock();
 
@@ -52,12 +57,32 @@ void main() {
     expect(result, tListEstabelecimento);
   });
 
+  test(
+      'should throw a ServerException when the call to get all the estabelecimentos is unsucessful',
+      () {
+    failureMock();
+
+    final result = dataSource.getAllEstabelecimentos();
+
+    expect(() => result, throwsA(ServerException()));
+  });
+
   test('should return a List of Ativos when is sucessful', () async {
     sucessMock();
 
     final result = await dataSource.getAllAtivosByEstabelecimento(1);
 
     expect(result, tAtivosList2);
+  });
+
+  test(
+      'should throw a ServerException when the call to get all ativos by estabelecimento is unsucessful',
+      () {
+    failureMock();
+
+    final result = dataSource.getAllAtivosByEstabelecimento(1);
+
+    expect(() => result, throwsA(ServerException()));
   });
 
   test("should call the Send Coordenada Method with correct url ", () async {

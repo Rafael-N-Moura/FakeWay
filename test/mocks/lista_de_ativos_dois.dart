@@ -1,5 +1,5 @@
 import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
-import 'package:fake_way/features/fake_way/data/models/estabelecimento_model.dart';
+import 'package:fake_way/features/estabelecimento_feature/data/models/estabelecimento_model.dart';
 
 const List<AtivoModel> tAtivosList2 = [
   AtivoModel(

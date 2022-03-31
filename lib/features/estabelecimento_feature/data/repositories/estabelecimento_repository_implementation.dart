@@ -2,8 +2,8 @@ import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
-import 'package:fake_way/features/fake_way/domain/entities/estabelecimento_entity.dart';
-import 'package:fake_way/features/fake_way/domain/repositories/i_estabelecimento_repository.dart';
+import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
+import 'package:fake_way/features/estabelecimento_feature/domain/repositories/i_estabelecimento_repository.dart';
 
 class EstabelecimentoRepositoryImplementation
     implements IEstabelecimentoRepository {

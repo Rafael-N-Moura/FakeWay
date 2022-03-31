@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fake_way/features/fake_way/domain/entities/estabelecimento_entity.dart';
+import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
 
 class Ativo extends Equatable {
   final Estabelecimento estabelecimento;
