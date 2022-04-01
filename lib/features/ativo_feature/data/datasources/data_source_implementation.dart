@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fake_way/core/endpoints/property_endpoint.dart';
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
-import 'package:fake_way/features/ativo_feature/data/datasource/i_data_source.dart';
+import 'package:fake_way/features/ativo_feature/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/ativo_feature/data/models/ativo_model.dart';
 
 class DataSourceImplementation extends IDataSource {
