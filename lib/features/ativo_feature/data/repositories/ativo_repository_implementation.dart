@@ -1,7 +1,7 @@
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:fake_way/features/ativo_feature/data/data_source/i_data_source.dart';
+import 'package:fake_way/features/ativo_feature/data/datasource/i_data_source.dart';
 import 'package:fake_way/features/ativo_feature/domain/entities/ativo_entity.dart';
 import 'package:fake_way/features/ativo_feature/domain/repositories/ativo_repository.dart';
 

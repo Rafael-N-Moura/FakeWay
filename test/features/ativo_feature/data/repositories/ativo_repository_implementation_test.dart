@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/errors/failures.dart';
-import 'package:fake_way/features/ativo_feature/data/data_source/i_data_source.dart';
+import 'package:fake_way/features/ativo_feature/data/datasource/i_data_source.dart';
 import 'package:fake_way/features/ativo_feature/data/repositories/ativo_repository_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
