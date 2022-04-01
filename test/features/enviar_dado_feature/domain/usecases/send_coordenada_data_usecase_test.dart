@@ -1,20 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
-import 'package:fake_way/features/fake_way/domain/repositories/ativo_repository.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/domain/repositories/enviar_dado_repository.dart';
 import 'package:fake_way/features/enviar_dato_feature.dart/domain/usecases/send_coordenada_data_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import '../../../../mocks/ativo_repository_mock.dart';
 import '../../../../mocks/coordenada_entity_mock.dart';
 
+class MockEnviarDadoRepository extends Mock implements IEnviarDadoRepository {}
+
 void main() {
-  late IAtivoRepository repository;
+  late IEnviarDadoRepository repository;
   late SendCoordenadaData usecase;
 
   setUp(() {
-    repository = MockAtivoRepository();
+    repository = MockEnviarDadoRepository();
     usecase = SendCoordenadaData(repository);
   });
 

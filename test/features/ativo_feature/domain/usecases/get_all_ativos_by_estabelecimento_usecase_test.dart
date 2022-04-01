@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/failures.dart';
-import 'package:fake_way/features/fake_way/domain/repositories/ativo_repository.dart';
-import 'package:fake_way/features/fake_way/domain/usecases/get_all_ativos_by_estabelecimento_usecase.dart';
+import 'package:fake_way/features/ativo_feature/domain/repositories/ativo_repository.dart';
+import 'package:fake_way/features/ativo_feature/domain/usecases/get_all_ativos_by_estabelecimento_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

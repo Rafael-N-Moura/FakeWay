@@ -1,5 +1,5 @@
 import 'package:fake_way/features/estabelecimento_feature/data/models/estabelecimento_model.dart';
-import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
+import 'package:fake_way/features/ativo_feature/domain/entities/ativo_entity.dart';
 import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
 
 class AtivoModel extends Ativo {

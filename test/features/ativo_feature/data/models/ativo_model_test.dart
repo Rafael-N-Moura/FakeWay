@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
-import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
+import 'package:fake_way/features/ativo_feature/data/models/ativo_model.dart';
+import 'package:fake_way/features/ativo_feature/domain/entities/ativo_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../mocks/ativo_mock.dart';

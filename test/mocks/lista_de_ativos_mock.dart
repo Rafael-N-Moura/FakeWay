@@ -1,4 +1,4 @@
-import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
+import 'package:fake_way/features/ativo_feature/data/models/ativo_model.dart';
 import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
 
 import 'estabelecimento_id_mock.dart';
