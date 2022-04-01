@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Colors {
+class WayColors {
   static Color primaryColor = const Color(0xFF004586);
   static Color grey = const Color(0xFFAAAFB9);
   static Color greyLight = const Color(0xFFE9E9E9);
