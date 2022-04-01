@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fake_way/features/fake_way/domain/entities/temperatura_entity.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/domain/entities/temperatura_entity.dart';
 
 class TemperaturaModel extends Temperatura {
   const TemperaturaModel(

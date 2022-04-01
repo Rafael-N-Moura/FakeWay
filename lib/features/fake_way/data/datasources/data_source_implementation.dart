@@ -5,14 +5,14 @@ import 'package:fake_way/core/http_client/http_client.dart';
 import 'package:fake_way/features/fake_way/data/datasources/endpoints/coordinate_endpoint.dart';
 import 'package:fake_way/features/fake_way/data/datasources/endpoints/humidity_endpoint.dart';
 import 'package:fake_way/features/fake_way/data/datasources/endpoints/property_endpoint.dart';
-import 'package:fake_way/features/fake_way/data/datasources/endpoints/temperature_endpoint.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/data/datasources/endpoints/temperature_endpoint.dart';
 import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
 import 'package:fake_way/features/fake_way/data/models/ativo_model.dart';
-import 'package:fake_way/features/fake_way/data/models/coordenata_model.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/data/models/coordenata_model.dart';
 import 'package:fake_way/features/estabelecimento_feature/data/models/estabelecimento_model.dart';
-import 'package:fake_way/features/fake_way/data/models/umidade_model.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/data/models/umidade_model.dart';
 
-import '../models/temperatura_model.dart';
+import '../../../enviar_dato_feature.dart/data/models/temperatura_model.dart';
 
 class DataSourceImplementation extends IDataSource {
   final HttpClient client;

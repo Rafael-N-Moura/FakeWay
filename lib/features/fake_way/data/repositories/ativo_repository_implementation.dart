@@ -1,14 +1,15 @@
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/features/fake_way/data/datasources/i_data_source.dart';
-import 'package:fake_way/features/fake_way/data/models/coordenata_model.dart';
-import 'package:fake_way/features/fake_way/data/models/umidade_model.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/data/models/coordenata_model.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/data/models/umidade_model.dart';
 import 'package:fake_way/features/fake_way/domain/entities/ativo_entity.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/features/fake_way/domain/repositories/ativo_repository.dart';
 
-import '../models/temperatura_model.dart';
+import '../../../enviar_dato_feature.dart/data/models/temperatura_model.dart';
+import '../../../enviar_dato_feature.dart/domain/entities/coordenada_entity.dart';
 
 class AtivoRepositoryImplementation implements IAtivoRepository {
   final IDataSource dataSource;
@@ -28,7 +29,7 @@ class AtivoRepositoryImplementation implements IAtivoRepository {
 
   @override
   Future<Either<Failure, NoParams>> sendCoordenadaData(
-      CoordenadaModel coordenada) async {
+      Coordenada coordenada) async {
     try {
       await dataSource.sendCoordenadaData(coordenada);
       return Right(NoParams());

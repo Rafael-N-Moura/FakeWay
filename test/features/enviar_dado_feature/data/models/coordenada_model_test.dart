@@ -1,5 +1,5 @@
-import 'package:fake_way/features/fake_way/data/models/coordenata_model.dart';
-import 'package:fake_way/features/fake_way/domain/entities/coordenada_entity.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/data/models/coordenata_model.dart';
+import 'package:fake_way/features/enviar_dato_feature.dart/domain/entities/coordenada_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../mocks/coordenada_entity_mock.dart';
