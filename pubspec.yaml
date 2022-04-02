@@ -40,6 +40,7 @@ dependencies:
   mocktail: ^0.3.0
   dartz: ^0.10.1
   equatable: ^2.0.3
+  table_calendar: ^3.0.5
 
 dev_dependencies:
   flutter_test:
@@ -64,8 +65,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -79,7 +80,27 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway/Raleway-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/Raleway/Raleway-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Raleway/Raleway-Light.ttf
+          weight: 100
+        - asset: assets/fonts/Raleway/Raleway-Medium.ttf
+          weight: 300
+
+    - family: Sansation
+      fonts:
+        - asset: assets/fonts/Sansation/Sansation_Regular.tff
+          weight: 500
+        - asset: assets/fonts/Sansation/Sansation_Bold.tff
+          weight: 700
+
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
