@@ -1,7 +1,7 @@
-import 'package:fake_way/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../../core/utils/way_colors.dart';
 import '../widgets/value_picker_widget.dart';
 
 class EnviarDadoPage extends StatelessWidget {
@@ -75,8 +75,7 @@ class EnviarDadoPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: Text(
                 'Enviando os seguintes dados',
-                style:
-                    TextStyle(color: CustomColors.primaryColor, fontSize: 20),
+                style: TextStyle(color: WayColors.primaryColor, fontSize: 20),
               ),
             ),
             Padding(
@@ -90,7 +89,7 @@ class EnviarDadoPage extends StatelessWidget {
                       Text(
                         'Sensor',
                         style: TextStyle(
-                            color: CustomColors.black,
+                            color: WayColors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 14),
                       ),
@@ -98,7 +97,7 @@ class EnviarDadoPage extends StatelessWidget {
                         '7',
                         style: TextStyle(
                             fontFamily: 'Sansation',
-                            color: CustomColors.black,
+                            color: WayColors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 16),
                       ),
@@ -109,7 +108,7 @@ class EnviarDadoPage extends StatelessWidget {
                       Text(
                         'Data',
                         style: TextStyle(
-                            color: CustomColors.black,
+                            color: WayColors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 14),
                       ),
@@ -117,7 +116,7 @@ class EnviarDadoPage extends StatelessWidget {
                         '10/20/2020',
                         style: TextStyle(
                             fontFamily: 'Sansation',
-                            color: CustomColors.black,
+                            color: WayColors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 16),
                       ),
@@ -129,7 +128,7 @@ class EnviarDadoPage extends StatelessWidget {
                       Text(
                         'Temperatura',
                         style: TextStyle(
-                            color: CustomColors.black,
+                            color: WayColors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 14),
                       ),
@@ -137,7 +136,7 @@ class EnviarDadoPage extends StatelessWidget {
                         '+1.5 C',
                         style: TextStyle(
                             fontFamily: 'Sansation',
-                            color: CustomColors.black,
+                            color: WayColors.black,
                             fontWeight: FontWeight.w400,
                             fontSize: 16),
                       ),

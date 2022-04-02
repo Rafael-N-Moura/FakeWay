@@ -1,7 +1,6 @@
 import 'package:fake_way/features/enviar_dato_feature.dart/presentation/widgets/value_picker_component_widget.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/way_colors.dart';
 
 class ValuePickerWidget extends StatelessWidget {
   const ValuePickerWidget({
@@ -17,7 +16,7 @@ class ValuePickerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: CustomColors.primaryLight,
+        color: WayColors.primaryLight,
         borderRadius: BorderRadius.circular(10),
       ),
       height: 48,
@@ -28,7 +27,7 @@ class ValuePickerWidget extends StatelessWidget {
           child: Text(
             '1.5 ${type ? '%RH' : 'ºC'}',
             style: TextStyle(
-                color: CustomColors.primaryColor,
+                color: WayColors.primaryColor,
                 fontSize: 16,
                 fontFamily: 'Sansation',
                 fontWeight: FontWeight.w700),
