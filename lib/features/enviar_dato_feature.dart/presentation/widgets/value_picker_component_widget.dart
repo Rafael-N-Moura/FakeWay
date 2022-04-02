@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/way_colors.dart';
 
 class ValuePickerComponentWidget extends StatelessWidget {
   const ValuePickerComponentWidget({
@@ -20,7 +20,7 @@ class ValuePickerComponentWidget extends StatelessWidget {
           width: 50,
           height: 48,
           decoration: BoxDecoration(
-            color: CustomColors.primaryColor,
+            color: WayColors.primaryColor,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -45,7 +45,7 @@ class ValuePickerComponentWidget extends StatelessWidget {
           width: 50,
           height: 48,
           decoration: BoxDecoration(
-            color: CustomColors.primaryColor,
+            color: WayColors.primaryColor,
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(10),
               bottomRight: Radius.circular(10),
