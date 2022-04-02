@@ -20,7 +20,7 @@ class FiltroEstabelecimentoWidget extends StatelessWidget {
                 Icons.search,
                 color: WayColors.grey,
               ),
-              hintText: "Procurar Empresa",
+              hintText: "Procurar empresa",
               hintStyle: TextStyle(color: WayColors.grey),
               border: InputBorder.none),
         ),

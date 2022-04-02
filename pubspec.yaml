@@ -96,9 +96,9 @@ flutter:
 
     - family: Sansation
       fonts:
-        - asset: assets/fonts/Sansation/Sansation_Regular.tff
+        - asset: assets/fonts/Sansation/Sansation_Regular.ttf
           weight: 500
-        - asset: assets/fonts/Sansation/Sansation_Bold.tff
+        - asset: assets/fonts/Sansation/Sansation_Bold.ttf
           weight: 700
 
   #   - family: Schyler

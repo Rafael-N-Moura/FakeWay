@@ -18,15 +18,17 @@ class EstabelecimentoPage extends StatelessWidget {
           const FiltroEstabelecimentoWidget(),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.only(top: 12),
               color: WayColors.primaryLight,
               child: ListView.builder(
+                padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
                 itemCount: 20,
                 itemBuilder: (_, index) {
-                  return EstabelecimentoCardWidget(
-                      estabelecimento: Estabelecimento(
-                          companyId: index,
-                          companyName: "Empresa teste $index"));
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: EstabelecimentoCardWidget(
+                        estabelecimento: Estabelecimento(
+                            companyId: index, companyName: "[Nome Empresa]")),
+                  );
                 },
               ),
             ),

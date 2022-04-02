@@ -23,14 +23,16 @@ class EstabelecimentoCardWidget extends StatelessWidget {
             ),
           ],
         ),
-        margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
               estabelecimento.companyName,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Raleway"),
             ),
             Icon(
               Icons.arrow_forward_ios,

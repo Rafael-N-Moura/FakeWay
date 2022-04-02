@@ -10,12 +10,15 @@ class CustomAppBarWidget extends AppBar {
           backgroundColor: Colors.white,
           elevation: 0,
           titleTextStyle: TextStyle(
-              color: WayColors.grey, fontSize: 20, fontWeight: FontWeight.w500),
+              color: WayColors.grey,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              fontFamily: "Raleway"),
           actions: [
             IconButton(
                 onPressed: () {},
                 icon: Icon(
-                  Icons.align_horizontal_right_rounded,
+                  Icons.segment,
                   color: WayColors.primaryColor,
                 ))
           ],
