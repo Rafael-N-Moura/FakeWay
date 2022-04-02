@@ -1,6 +1,6 @@
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
-import 'package:fake_way/features/ativo_feature/data/datasource/data_source_implementation.dart';
+import 'package:fake_way/features/ativo_feature/data/datasources/data_source_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -17,8 +17,6 @@ void main() {
     client = MockHttpClient();
     dataSource = DataSourceImplementation(client);
   });
-
-  const getUrlExpected = "https://wayds.net:8081/fakeway/api/v1/Property";
 
   sucessMock() {
     when(() => client.get(any())).thenAnswer(
