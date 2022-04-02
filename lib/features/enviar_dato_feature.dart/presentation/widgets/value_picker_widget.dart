@@ -36,7 +36,7 @@ class ValuePickerWidget extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: const [
             ValuePickerComponentWidget(label1: '-1', label2: '-0.5'),
             ValuePickerComponentWidget(label1: '+0.5', label2: '+1'),
           ],
