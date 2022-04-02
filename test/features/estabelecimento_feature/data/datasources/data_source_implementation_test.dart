@@ -1,6 +1,6 @@
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
-import 'package:fake_way/features/estabelecimento_feature/data/datasources/data_source_implementation.dart';
+import 'package:fake_way/features/estabelecimento_feature/data/datasources/estabelecimento_data_source_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -10,12 +10,12 @@ import '../../../../mocks/lista_de_estabelecimentos_mock.dart';
 class MockHttpClient extends Mock implements HttpClient {}
 
 void main() {
-  late DataSourceImplementation dataSource;
+  late EstabelecimentoDataSourceImplementation dataSource;
   late HttpClient client;
 
   setUp(() {
     client = MockHttpClient();
-    dataSource = DataSourceImplementation(client);
+    dataSource = EstabelecimentoDataSourceImplementation(client);
   });
 
   sucessMock() {
