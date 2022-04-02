@@ -1,6 +1,6 @@
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
-import 'package:fake_way/features/ativo_feature/data/datasources/data_source_implementation.dart';
+import 'package:fake_way/features/ativo_feature/data/datasources/ativo_data_source_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -10,12 +10,12 @@ import '../../../../mocks/lista_de_ativos_dois.dart';
 class MockHttpClient extends Mock implements HttpClient {}
 
 void main() {
-  late DataSourceImplementation dataSource;
+  late AtivoDataSourceImplementation dataSource;
   late HttpClient client;
 
   setUp(() {
     client = MockHttpClient();
-    dataSource = DataSourceImplementation(client);
+    dataSource = AtivoDataSourceImplementation(client);
   });
 
   sucessMock() {

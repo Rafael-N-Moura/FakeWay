@@ -1,8 +1,8 @@
 import 'package:fake_way/core/utils/way_colors.dart';
 import 'package:flutter/material.dart';
 
-class FiltroEstabelecimentoWidget extends StatelessWidget {
-  const FiltroEstabelecimentoWidget({Key? key}) : super(key: key);
+class FiltroAtivoWidget extends StatelessWidget {
+  const FiltroAtivoWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class FiltroEstabelecimentoWidget extends StatelessWidget {
                 Icons.search,
                 color: WayColors.grey,
               ),
-              hintText: "Procurar empresa",
+              hintText: "Procurar ativo",
               hintStyle: TextStyle(color: WayColors.grey),
               border: InputBorder.none),
         ),

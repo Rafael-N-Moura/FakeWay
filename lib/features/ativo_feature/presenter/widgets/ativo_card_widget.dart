@@ -1,11 +1,10 @@
 import 'package:fake_way/core/utils/way_colors.dart';
-import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
+import 'package:fake_way/features/ativo_feature/domain/entities/ativo_entity.dart';
 import 'package:flutter/material.dart';
 
-class EstabelecimentoCardWidget extends StatelessWidget {
-  final Estabelecimento estabelecimento;
-  const EstabelecimentoCardWidget({Key? key, required this.estabelecimento})
-      : super(key: key);
+class AtivoCardWidget extends StatelessWidget {
+  final Ativo ativo;
+  const AtivoCardWidget({Key? key, required this.ativo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class EstabelecimentoCardWidget extends StatelessWidget {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
-              estabelecimento.companyName,
+              ativo.nome ?? "Ativo sem nome",
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

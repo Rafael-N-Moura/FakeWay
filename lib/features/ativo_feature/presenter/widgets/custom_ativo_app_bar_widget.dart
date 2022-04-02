@@ -1,11 +1,11 @@
 import 'package:fake_way/core/utils/way_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBarWidget extends AppBar {
-  CustomAppBarWidget({Key? key})
+class CustomAtivoAppBarWidget extends AppBar {
+  CustomAtivoAppBarWidget({Key? key})
       : super(
           key: key,
-          title: const Text("Selecione a Empresa"),
+          title: const Text("Selecione o Ativo"),
           titleSpacing: 24,
           backgroundColor: Colors.white,
           elevation: 0,

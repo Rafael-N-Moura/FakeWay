@@ -1,18 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/errors/failures.dart';
-import 'package:fake_way/features/estabelecimento_feature/data/datasources/i_data_source.dart';
+import 'package:fake_way/features/estabelecimento_feature/data/datasources/i_estabelecimento_data_source.dart';
 import 'package:fake_way/features/estabelecimento_feature/data/repositories/estabelecimento_repository_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../mocks/lista_de_estabelecimentos_mock.dart';
 
-class MockDataSource extends Mock implements IDataSource {}
+class MockDataSource extends Mock implements IEstabelecimentoDataSource {}
 
 void main() {
   late EstabelecimentoRepositoryImplementation repository;
-  late IDataSource dataSource;
+  late IEstabelecimentoDataSource dataSource;
 
   setUp(() {
     dataSource = MockDataSource();
