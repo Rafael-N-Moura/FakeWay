@@ -36,8 +36,8 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ModuleRoute(Modular.initialRoute, module: EstabelecimentoModule()),
+        ModuleRoute('/estabelecimento-module', module: EstabelecimentoModule()),
         ModuleRoute('/ativo-module', module: AtivoModule()),
-        ModuleRoute('/enviar-dado-module', module: EnviarDadoModule()),
+        ModuleRoute(Modular.initialRoute, module: EnviarDadoModule()),
       ];
 }

@@ -25,7 +25,7 @@ class ValuePickerWidget extends StatelessWidget {
         Align(
           alignment: Alignment.center,
           child: Text(
-            '1.5 ${type ? '%RH' : 'ºC'}',
+            '1.5 ${type ? '%RH' : 'C'}',
             style: TextStyle(
                 color: WayColors.primaryColor,
                 fontSize: 16,
