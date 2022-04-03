@@ -1,6 +1,6 @@
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
-import 'package:fake_way/features/enviar_dato_feature.dart/data/datasources/data_source_implementation.dart';
+import 'package:fake_way/features/enviar_dado_feature/data/datasources/data_source_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

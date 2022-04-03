@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
-import 'package:fake_way/features/enviar_dato_feature.dart/data/datasources/data_source.dart';
-import 'package:fake_way/features/enviar_dato_feature.dart/data/repositories/enviar_dato_repository_implementation.dart';
+import 'package:fake_way/features/enviar_dado_feature/data/datasources/data_source.dart';
+import 'package:fake_way/features/enviar_dado_feature/data/repositories/enviar_dato_repository_implementation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

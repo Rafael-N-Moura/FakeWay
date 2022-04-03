@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
-import 'package:fake_way/features/enviar_dato_feature.dart/domain/usecases/send_umidade_data_usecase.dart';
+import 'package:fake_way/features/enviar_dado_feature/domain/usecases/send_umidade_data_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../../../mocks/umidade_entity_mock.dart';
-import 'package:fake_way/features/enviar_dato_feature.dart/domain/repositories/enviar_dado_repository.dart';
+import 'package:fake_way/features/enviar_dado_feature/domain/repositories/enviar_dado_repository.dart';
 
 class MockEnviarDadoRepository extends Mock implements IEnviarDadoRepository {}
 

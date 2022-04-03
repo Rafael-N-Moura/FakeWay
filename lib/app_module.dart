@@ -5,8 +5,12 @@ import 'package:fake_way/features/ativo_feature/presenter/pages/ativo_page.dart'
 import 'package:fake_way/features/estabelecimento_feature/data/datasources/estabelecimento_data_source_implementation.dart';
 import 'package:fake_way/features/estabelecimento_feature/data/repositories/estabelecimento_repository_implementation.dart';
 import 'package:fake_way/features/estabelecimento_feature/domain/usecases/get_all_estabelecimentos_usecase.dart';
+import 'package:fake_way/features/estabelecimento_feature/establecimento_module.dart';
 import 'package:fake_way/features/estabelecimento_feature/presenter/pages/estabelecimento_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'features/ativo_feature/ativo_module.dart';
+import 'features/enviar_dado_feature/enviar_dado_module.dart';
 
 class AppModule extends Module {
   @override
@@ -32,7 +36,8 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute("/", child: (_, __) => const EstabelecimentoPage()),
-        ChildRoute("/ativo", child: (_, __) => const AtivoPage()),
+        ModuleRoute(Modular.initialRoute, module: EstabelecimentoModule()),
+        ModuleRoute('/ativo-module', module: AtivoModule()),
+        ModuleRoute('/enviar-dado-module', module: EnviarDadoModule()),
       ];
 }

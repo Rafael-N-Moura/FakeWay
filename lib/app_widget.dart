@@ -8,11 +8,14 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'FakeWay',
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       theme: ThemeData(
-          primaryColor: WayColors.primaryColor, fontFamily: 'Raleway'),
+        primaryColor: WayColors.primaryColor,
+        fontFamily: 'Raleway',
+      ),
     );
   }
 }

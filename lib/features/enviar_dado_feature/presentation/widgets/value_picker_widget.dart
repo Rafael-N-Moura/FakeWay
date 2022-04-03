@@ -1,4 +1,4 @@
-import 'package:fake_way/features/enviar_dato_feature.dart/presentation/widgets/value_picker_component_widget.dart';
+import 'package:fake_way/features/enviar_dado_feature/presentation/widgets/value_picker_component_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utils/way_colors.dart';
 
