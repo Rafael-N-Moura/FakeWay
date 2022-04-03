@@ -1,6 +1,7 @@
 import 'package:fake_way/core/utils/way_colors.dart';
 import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class EstabelecimentoCardWidget extends StatelessWidget {
   final Estabelecimento estabelecimento;
@@ -41,7 +42,9 @@ class EstabelecimentoCardWidget extends StatelessWidget {
           ]),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Modular.to.pushNamed('/ativo-module/', arguments: estabelecimento);
+      },
     );
   }
 }

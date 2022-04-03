@@ -7,7 +7,8 @@ import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabe
 import 'package:flutter/material.dart';
 
 class AtivoPage extends StatelessWidget {
-  const AtivoPage({Key? key}) : super(key: key);
+  final Estabelecimento estabelecimento;
+  const AtivoPage({Key? key, required this.estabelecimento}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +25,18 @@ class AtivoPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
                 itemCount: 20,
                 itemBuilder: (_, index) {
-                  return const Padding(
-                    padding: EdgeInsets.only(bottom: 24),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
                     child: AtivoCardWidget(
                         ativo: Ativo(
-                            estabelecimento: Estabelecimento(
-                                companyId: 1, companyName: "teste"),
+                            estabelecimento: estabelecimento,
                             sensorId: 1,
                             dispotividoId: 1,
                             nome: "[Nome Ativo]",
                             tipoId: 1,
                             tipoDescricao: "tipoDescricao",
                             icone: "",
-                            sensores: [""],
+                            sensores: const [""],
                             latitude: 1,
                             longitude: 1)),
                   );

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/utils/way_colors.dart';
+import '../../../ativo_feature/domain/entities/ativo_entity.dart';
 import '../widgets/value_picker_widget.dart';
 
 class EnviarDadoPage extends StatelessWidget {
-  const EnviarDadoPage({Key? key}) : super(key: key);
+  final Ativo ativo;
+  const EnviarDadoPage({Key? key, required this.ativo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +20,20 @@ class EnviarDadoPage extends StatelessWidget {
           elevation: 1,
           toolbarHeight: 80,
           backgroundColor: Colors.white,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Theme.of(context).primaryColor,
+          leading: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
+            onTap: () {
+              Modular.to.pop();
+            },
           ),
           title: Text(
-            "Nome do Ativo",
+            ativo.nome ?? "Ativo sem nome",
             style:
                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
           ),
@@ -58,7 +66,7 @@ class EnviarDadoPage extends StatelessWidget {
                 )
               ]),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             StaticEnviarDadoPage(
               type: false,

@@ -4,6 +4,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 class EnviarDadoModule extends Module {
   @override
   List<ModularRoute> get routes => [
-        ChildRoute("/", child: (_, __) => const EnviarDadoPage()),
+        ChildRoute("/",
+            child: (context, args) => EnviarDadoPage(
+                  ativo: args.data,
+                )),
       ];
 }

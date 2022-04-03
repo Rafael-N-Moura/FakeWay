@@ -5,6 +5,9 @@ import 'presenter/pages/ativo_page.dart';
 class AtivoModule extends Module {
   @override
   List<ModularRoute> get routes => [
-        ChildRoute("/", child: (_, __) => const AtivoPage()),
+        ChildRoute("/",
+            child: (context, args) => AtivoPage(
+                  estabelecimento: args.data,
+                )),
       ];
 }

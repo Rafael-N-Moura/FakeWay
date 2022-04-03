@@ -1,6 +1,7 @@
 import 'package:fake_way/core/utils/way_colors.dart';
 import 'package:fake_way/features/ativo_feature/domain/entities/ativo_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AtivoCardWidget extends StatelessWidget {
   final Ativo ativo;
@@ -40,7 +41,9 @@ class AtivoCardWidget extends StatelessWidget {
           ]),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Modular.to.pushNamed('/enviar-dado-module/', arguments: ativo);
+      },
     );
   }
 }
