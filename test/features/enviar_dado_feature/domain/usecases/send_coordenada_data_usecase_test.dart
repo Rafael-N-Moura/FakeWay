@@ -13,7 +13,6 @@ class MockEnviarDadoRepository extends Mock implements IEnviarDadoRepository {}
 void main() {
   late IEnviarDadoRepository repository;
   late SendCoordenadaData usecase;
-
   setUp(() {
     repository = MockEnviarDadoRepository();
     usecase = SendCoordenadaData(repository);

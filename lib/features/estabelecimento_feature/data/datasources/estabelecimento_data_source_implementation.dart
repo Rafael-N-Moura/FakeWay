@@ -16,7 +16,7 @@ class EstabelecimentoDataSourceImplementation
   Future<List<EstabelecimentoModel>> getAllEstabelecimentos() async {
     final response = await client.get(PropertyEndpoint.api());
     if (response.statusCode == 200) {
-      Iterable list = jsonDecode(response.data);
+      Iterable list = response.data;
       List<EstabelecimentoModel> estabelecimentoList =
           list.map((e) => EstabelecimentoModel.fromJson(e)).toSet().toList();
       return estabelecimentoList;

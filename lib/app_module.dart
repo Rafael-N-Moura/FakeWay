@@ -5,22 +5,28 @@ import 'package:fake_way/features/estabelecimento_feature/data/datasources/estab
 import 'package:fake_way/features/estabelecimento_feature/data/repositories/estabelecimento_repository_implementation.dart';
 import 'package:fake_way/features/estabelecimento_feature/domain/usecases/get_all_estabelecimentos_usecase.dart';
 import 'package:fake_way/features/estabelecimento_feature/establecimento_module.dart';
+import 'package:fake_way/features/estabelecimento_feature/presenter/controllers/estabelecimento_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'core/http_client/dio_implementation.dart';
+import 'core/http_client/http_client.dart';
 import 'features/ativo_feature/ativo_module.dart';
+import 'features/ativo_feature/presenter/controllers/ativo_controller.dart';
 import 'features/enviar_dado_feature/enviar_dado_module.dart';
 
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
+        Bind<HttpClient>((i) => DioImplementation()),
         //Estabelecimento Feature
         Bind(
           (i) => EstabelecimentoDataSourceImplementation(i()),
         ),
         Bind((i) => EstabelecimentoRepositoryImplementation(i())),
-        Bind(
+        Bind.singleton(
           (i) => GetAllEstabelecimentosUsecase(i()),
         ),
+        Bind.singleton(((i) => EstabelecimentoController(usecase: i()))),
 
         //Ativo Feature
         Bind(
@@ -30,6 +36,7 @@ class AppModule extends Module {
         Bind(
           (i) => GetAllAtivosByEstabelecimentoUsecase(i()),
         ),
+        Bind.singleton(((i) => AtivoController(usecase: i()))),
       ];
 
   @override

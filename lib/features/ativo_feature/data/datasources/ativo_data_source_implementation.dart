@@ -15,7 +15,7 @@ class AtivoDataSourceImplementation extends IAtivoDataSource {
       int estabelecimentoId) async {
     final response = await client.get(PropertyEndpoint.api());
     if (response.statusCode == 200) {
-      Iterable list = jsonDecode(response.data);
+      Iterable list = response.data;
       List<AtivoModel> ativoList = list
           .map((e) => AtivoModel.fromJson(e))
           .where((e) => e.estabelecimento.companyId == estabelecimentoId)

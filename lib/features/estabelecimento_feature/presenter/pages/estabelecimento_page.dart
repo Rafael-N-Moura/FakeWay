@@ -4,9 +4,27 @@ import 'package:fake_way/features/estabelecimento_feature/presenter/widgets/cust
 import 'package:fake_way/features/estabelecimento_feature/presenter/widgets/estabelecimento_card_widget.dart';
 import 'package:fake_way/features/estabelecimento_feature/presenter/widgets/filtro_estabelecimento_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-class EstabelecimentoPage extends StatelessWidget {
-  const EstabelecimentoPage({Key? key}) : super(key: key);
+import '../controllers/estabelecimento_controller.dart';
+
+class EstabelecimentoPage extends StatefulWidget {
+  EstabelecimentoPage({Key? key}) : super(key: key);
+
+  @override
+  State<EstabelecimentoPage> createState() => _EstabelecimentoPageState();
+}
+
+class _EstabelecimentoPageState extends State<EstabelecimentoPage> {
+  final EstabelecimentoController controller =
+      Modular.get<EstabelecimentoController>();
+
+  @override
+  void initState() {
+    controller.getAllEstabelecimentos();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +37,20 @@ class EstabelecimentoPage extends StatelessWidget {
           Expanded(
             child: Container(
               color: WayColors.primaryLight,
-              child: ListView.builder(
-                padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
-                itemCount: 20,
-                itemBuilder: (_, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 24),
-                    child: EstabelecimentoCardWidget(
-                        estabelecimento: Estabelecimento(
-                            companyId: index, companyName: "[Nome Empresa]")),
+              child: Observer(
+                builder: (_) {
+                  return ListView.builder(
+                    padding:
+                        const EdgeInsets.only(left: 24, right: 24, top: 24),
+                    itemCount: controller.estabelecimentos.length,
+                    itemBuilder: (_, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 24),
+                        child: EstabelecimentoCardWidget(
+                          estabelecimento: controller.estabelecimentos[index],
+                        ),
+                      );
+                    },
                   );
                 },
               ),
