@@ -285,7 +285,14 @@ class CustomTableCalendar extends StatelessWidget {
           ),
           onDaySelected: (selectedDay, focusedDay) {
             //controller.setFocusedDay(focusedDay, widget.type);
-            controller.setSelectedDay(selectedDay, widget.type);
+            controller.setSelectedDay(selectedDay, type);
+          },
+          selectedDayPredicate: (day) {
+            return isSameDay(
+                type == "temperatura"
+                    ? controller.currentTemperaturaDate
+                    : controller.currentUmidadeDate,
+                day);
           },
         );
       }),
