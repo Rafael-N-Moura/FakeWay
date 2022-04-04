@@ -33,7 +33,7 @@ class ValuePickerWidget extends StatelessWidget {
               return Text(
                 type
                     ? '${controller.currentUmidade} %RH'
-                    : '${controller.currentTemperatura} C',
+                    : '${controller.currentTemperatura} °C',
                 style: TextStyle(
                     color: WayColors.primaryColor,
                     fontSize: 16,

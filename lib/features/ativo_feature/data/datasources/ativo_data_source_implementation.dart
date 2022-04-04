@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fake_way/core/endpoints/property_endpoint.dart';
 import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';

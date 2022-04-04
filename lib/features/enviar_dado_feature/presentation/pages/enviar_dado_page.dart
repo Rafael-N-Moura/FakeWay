@@ -62,7 +62,7 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorPadding: const EdgeInsets.symmetric(horizontal: 30),
               indicatorWeight: 8,
-              indicatorColor: Theme.of(context).primaryColor,
+              indicatorColor: WayColors.primaryColor,
               tabs: [
                 Tab(
                   child: Text(
@@ -95,7 +95,7 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
             StaticEnviarDadoPage(
               type: true,
             ),
-            DynamicEnviarDadoPage(),
+            const DynamicEnviarDadoPage(),
           ],
         ),
       ),
@@ -111,7 +111,7 @@ class DynamicEnviarDadoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Completer<GoogleMapController> _controller = Completer();
-    final CameraPosition _kGooglePlex = CameraPosition(
+    const CameraPosition _kGooglePlex = CameraPosition(
       target: LatLng(-8.0458197, -34.9464914),
       zoom: 14.4746,
     );
@@ -285,7 +285,7 @@ class CustomTableCalendar extends StatelessWidget {
           ),
           onDaySelected: (selectedDay, focusedDay) {
             //controller.setFocusedDay(focusedDay, widget.type);
-            controller.setSelectedDay(selectedDay, widget.type);
+            controller.setSelectedDay(selectedDay, type);
           },
         );
       }),

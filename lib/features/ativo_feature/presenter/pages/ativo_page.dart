@@ -1,5 +1,4 @@
 import 'package:fake_way/core/utils/way_colors.dart';
-import 'package:fake_way/features/ativo_feature/domain/entities/ativo_entity.dart';
 import 'package:fake_way/features/ativo_feature/presenter/controllers/ativo_controller.dart';
 import 'package:fake_way/features/ativo_feature/presenter/widgets/ativo_card_widget.dart';
 import 'package:fake_way/features/ativo_feature/presenter/widgets/custom_ativo_app_bar_widget.dart';
@@ -11,7 +10,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AtivoPage extends StatefulWidget {
   final Estabelecimento estabelecimento;
-  AtivoPage({Key? key, required this.estabelecimento}) : super(key: key);
+  const AtivoPage({Key? key, required this.estabelecimento}) : super(key: key);
 
   @override
   State<AtivoPage> createState() => _AtivoPageState();

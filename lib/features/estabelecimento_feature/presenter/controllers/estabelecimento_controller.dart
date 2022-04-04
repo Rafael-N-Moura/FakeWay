@@ -22,6 +22,21 @@ abstract class _EstabelecimentoControllerBase with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  String filter = "";
+
+  @computed
+  List<Estabelecimento> get listFiltered {
+    if (filter.isEmpty) {
+      return estabelecimentos;
+    } else {
+      return estabelecimentos
+          .where((item) =>
+              item.companyName.toLowerCase().contains(filter.toLowerCase()))
+          .toList();
+    }
+  }
+
   @action
   getAllEstabelecimentos() async {
     isLoading = true;
@@ -30,4 +45,7 @@ abstract class _EstabelecimentoControllerBase with Store {
         (l) => null, (sucess) => estabelecimentos = ObservableList.of(sucess));
     isLoading = false;
   }
+
+  @action
+  setFilter(String value) => filter = value;
 }
