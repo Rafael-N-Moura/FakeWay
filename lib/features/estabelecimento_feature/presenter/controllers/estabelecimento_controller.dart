@@ -19,10 +19,15 @@ abstract class _EstabelecimentoControllerBase with Store {
   ObservableList<Estabelecimento> estabelecimentos =
       ObservableList<Estabelecimento>();
 
+  @observable
+  bool isLoading = false;
+
   @action
   getAllEstabelecimentos() async {
+    isLoading = true;
     final result = await usecase(NoParams());
     result.fold(
         (l) => null, (sucess) => estabelecimentos = ObservableList.of(sucess));
+    isLoading = false;
   }
 }

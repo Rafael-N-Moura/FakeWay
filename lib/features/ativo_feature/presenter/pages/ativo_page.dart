@@ -33,12 +33,6 @@ class _AtivoPageState extends State<AtivoPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    controller.getAllAtivos(widget.estabelecimento.companyId);
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -46,13 +40,17 @@ class _AtivoPageState extends State<AtivoPage> {
       body: Column(
         children: [
           const FiltroAtivoWidget(),
-          Observer(builder: (_) {
-            return controller.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Expanded(
-                    child: Container(
-                      color: WayColors.primaryLight,
-                      child: ListView.builder(
+          Expanded(
+            child: Container(
+              color: WayColors.primaryLight,
+              child: Observer(builder: (_) {
+                return controller.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: WayColors.primaryColor,
+                        ),
+                      )
+                    : ListView.builder(
                         padding:
                             const EdgeInsets.only(left: 24, right: 24, top: 24),
                         itemCount: controller.ativos.length,
@@ -64,10 +62,10 @@ class _AtivoPageState extends State<AtivoPage> {
                             ),
                           );
                         },
-                      ),
-                    ),
-                  );
-          }),
+                      );
+              }),
+            ),
+          ),
         ],
       ),
     );

@@ -25,6 +25,22 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
     });
   }
 
+  final _$isLoadingAtom =
+      Atom(name: '_EstabelecimentoControllerBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   final _$getAllEstabelecimentosAsyncAction =
       AsyncAction('_EstabelecimentoControllerBase.getAllEstabelecimentos');
 
@@ -37,7 +53,8 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
   @override
   String toString() {
     return '''
-estabelecimentos: ${estabelecimentos}
+estabelecimentos: ${estabelecimentos},
+isLoading: ${isLoading}
     ''';
   }
 }

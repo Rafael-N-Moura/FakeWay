@@ -1,20 +1,35 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/utils/way_colors.dart';
 import '../../../ativo_feature/domain/entities/ativo_entity.dart';
+import '../controllers/enviar_dado_controller.dart';
 import '../widgets/scroll_indicator_widget.dart';
 import '../widgets/send_data_button_widget.dart';
 import '../widgets/send_data_label_widget.dart';
 import '../widgets/value_picker_widget.dart';
 
-class EnviarDadoPage extends StatelessWidget {
+class EnviarDadoPage extends StatefulWidget {
   final Ativo ativo;
   const EnviarDadoPage({Key? key, required this.ativo}) : super(key: key);
+
+  @override
+  State<EnviarDadoPage> createState() => _EnviarDadoPageState();
+}
+
+class _EnviarDadoPageState extends State<EnviarDadoPage> {
+  final EnviarDadoController controller = Modular.get<EnviarDadoController>();
+
+  @override
+  void initState() {
+    controller.setCurrentAtivo(widget.ativo);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +54,7 @@ class EnviarDadoPage extends StatelessWidget {
             },
           ),
           title: Text(
-            ativo.nome ?? "Ativo sem nome",
+            widget.ativo.nome ?? "Ativo sem nome",
             style:
                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
           ),
@@ -72,7 +87,7 @@ class EnviarDadoPage extends StatelessWidget {
                 )
               ]),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             StaticEnviarDadoPage(
               type: false,
@@ -129,7 +144,9 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                     const Center(
                       child: ScrollIndicatorWidget(),
                     ),
-                    const CustomTableCalendar(),
+                    CustomTableCalendar(
+                      type: 'coordenada',
+                    ),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24),
                       child: TextField(
@@ -246,25 +263,38 @@ class DynamicEnviarDadoPage extends StatelessWidget {
 }
 
 class CustomTableCalendar extends StatelessWidget {
-  const CustomTableCalendar({
+  CustomTableCalendar({
     Key? key,
+    required this.type,
   }) : super(key: key);
+  final String type;
+  final EnviarDadoController controller = Modular.get<EnviarDadoController>();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-      child: TableCalendar(
-        focusedDay: DateTime.now(),
-        firstDay: DateTime(2020, 10, 10),
-        lastDay: DateTime(2022, 10, 10),
-      ),
+      child: Observer(builder: (_) {
+        return TableCalendar(
+          focusedDay: DateTime.now(),
+          firstDay: DateTime.now().add(
+            const Duration(days: -365),
+          ),
+          lastDay: DateTime.now().add(
+            const Duration(days: 365),
+          ),
+          onDaySelected: (selectedDay, focusedDay) {
+            //controller.setFocusedDay(focusedDay, widget.type);
+            controller.setSelectedDay(selectedDay, widget.type);
+          },
+        );
+      }),
     );
   }
 }
 
 class StaticEnviarDadoPage extends StatelessWidget {
-  const StaticEnviarDadoPage({
+  StaticEnviarDadoPage({
     Key? key,
     required this.type,
   }) : super(key: key);
@@ -273,12 +303,14 @@ class StaticEnviarDadoPage extends StatelessWidget {
   // true -> Umidade
   final bool type;
 
+  final EnviarDadoController controller = Modular.get<EnviarDadoController>();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const CustomTableCalendar(),
+          CustomTableCalendar(type: type ? 'umidade' : 'temperatura'),
           ValuePickerWidget(
             type: type,
           ),
@@ -294,17 +326,19 @@ class StaticEnviarDadoPage extends StatelessWidget {
                     Text(
                       'Sensor',
                       style: TextStyle(
-                          color: WayColors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
+                        color: WayColors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
                     ),
                     Text(
-                      '7',
+                      controller.currentAtivo!.sensorId.toString(),
                       style: TextStyle(
-                          fontFamily: 'Sansation',
-                          color: WayColors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16),
+                        fontFamily: 'Sansation',
+                        color: WayColors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),
@@ -317,14 +351,18 @@ class StaticEnviarDadoPage extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           fontSize: 14),
                     ),
-                    Text(
-                      '10/20/2020',
-                      style: TextStyle(
-                          fontFamily: 'Sansation',
-                          color: WayColors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16),
-                    ),
+                    Observer(builder: (_) {
+                      return Text(
+                        type
+                            ? "${controller.currentUmidadeDate.day}/${controller.currentUmidadeDate.month}/${controller.currentUmidadeDate.year}"
+                            : "${controller.currentTemperaturaDate.day}/${controller.currentTemperaturaDate.month}/${controller.currentTemperaturaDate.year}",
+                        style: TextStyle(
+                            fontFamily: 'Sansation',
+                            color: WayColors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16),
+                      );
+                    }),
                   ],
                 ),
                 Column(
@@ -337,14 +375,19 @@ class StaticEnviarDadoPage extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           fontSize: 14),
                     ),
-                    Text(
-                      '+1.5 C',
-                      style: TextStyle(
+                    Observer(builder: (_) {
+                      return Text(
+                        type
+                            ? controller.currentUmidade.toString()
+                            : controller.currentTemperatura.toString(),
+                        style: TextStyle(
                           fontFamily: 'Sansation',
                           color: WayColors.black,
                           fontWeight: FontWeight.w400,
-                          fontSize: 16),
-                    ),
+                          fontSize: 16,
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ],
