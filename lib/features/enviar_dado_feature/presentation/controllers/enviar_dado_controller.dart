@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobx/mobx.dart';
 import 'package:fake_way/features/enviar_dado_feature/domain/entities/coordenada_entity.dart';
 import 'package:fake_way/features/enviar_dado_feature/domain/usecases/send_temperature_data_usecase.dart';
@@ -28,6 +29,15 @@ abstract class _EnviarDadoControllerBase with Store {
   }
 
   @observable
+  double currentLatitude = 0;
+
+  @observable
+  double currentLongitude = 0;
+
+  @observable
+  Marker marcador = const Marker(markerId: MarkerId("Meu Ponto"));
+
+  @observable
   double currentTemperatura = 0;
 
   @observable
@@ -44,6 +54,22 @@ abstract class _EnviarDadoControllerBase with Store {
 
   @observable
   late Coordenada currentCoordenada;
+
+  @action
+  changeLatitudeAndLongitude(double latitude, double longitude) {
+    currentLatitude = latitude;
+    currentLongitude = longitude;
+  }
+
+  @action
+  Marker getMarker() {
+    return marcador;
+  }
+
+  @action
+  setMarker(double lat, double long) {
+    marcador = Marker(markerId: marcador.mapsId, position: LatLng(lat, long));
+  }
 
   @action
   increaseTemperatura(double value) {

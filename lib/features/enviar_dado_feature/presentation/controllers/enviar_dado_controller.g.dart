@@ -25,6 +25,53 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
     });
   }
 
+  final _$currentLatitudeAtom =
+      Atom(name: '_EnviarDadoControllerBase.currentLatitude');
+
+  @override
+  double get currentLatitude {
+    _$currentLatitudeAtom.reportRead();
+    return super.currentLatitude;
+  }
+
+  @override
+  set currentLatitude(double value) {
+    _$currentLatitudeAtom.reportWrite(value, super.currentLatitude, () {
+      super.currentLatitude = value;
+    });
+  }
+
+  final _$currentLongitudeAtom =
+      Atom(name: '_EnviarDadoControllerBase.currentLongitude');
+
+  @override
+  double get currentLongitude {
+    _$currentLongitudeAtom.reportRead();
+    return super.currentLongitude;
+  }
+
+  @override
+  set currentLongitude(double value) {
+    _$currentLongitudeAtom.reportWrite(value, super.currentLongitude, () {
+      super.currentLongitude = value;
+    });
+  }
+
+  final _$marcadorAtom = Atom(name: '_EnviarDadoControllerBase.marcador');
+
+  @override
+  Marker get marcador {
+    _$marcadorAtom.reportRead();
+    return super.marcador;
+  }
+
+  @override
+  set marcador(Marker value) {
+    _$marcadorAtom.reportWrite(value, super.marcador, () {
+      super.marcador = value;
+    });
+  }
+
   final _$currentTemperaturaAtom =
       Atom(name: '_EnviarDadoControllerBase.currentTemperatura');
 
@@ -203,6 +250,40 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   }
 
   @override
+  dynamic changeLatitudeAndLongitude(double latitude, double longitude) {
+    final _$actionInfo =
+        _$_EnviarDadoControllerBaseActionController.startAction(
+            name: '_EnviarDadoControllerBase.changeLatitudeAndLongitude');
+    try {
+      return super.changeLatitudeAndLongitude(latitude, longitude);
+    } finally {
+      _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Marker getMarker() {
+    final _$actionInfo = _$_EnviarDadoControllerBaseActionController
+        .startAction(name: '_EnviarDadoControllerBase.getMarker');
+    try {
+      return super.getMarker();
+    } finally {
+      _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setMarker(double lat, double long) {
+    final _$actionInfo = _$_EnviarDadoControllerBaseActionController
+        .startAction(name: '_EnviarDadoControllerBase.setMarker');
+    try {
+      return super.setMarker(lat, long);
+    } finally {
+      _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic increaseTemperatura(double value) {
     final _$actionInfo = _$_EnviarDadoControllerBaseActionController
         .startAction(name: '_EnviarDadoControllerBase.increaseTemperatura');
@@ -294,6 +375,9 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   String toString() {
     return '''
 currentAtivo: ${currentAtivo},
+currentLatitude: ${currentLatitude},
+currentLongitude: ${currentLongitude},
+marcador: ${marcador},
 currentTemperatura: ${currentTemperatura},
 currentUmidade: ${currentUmidade},
 currentTemperaturaDate: ${currentTemperaturaDate},
