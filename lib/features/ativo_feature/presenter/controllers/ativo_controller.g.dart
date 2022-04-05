@@ -62,6 +62,21 @@ mixin _$AtivoController on _AtivoControllerBase, Store {
     });
   }
 
+  final _$sortedAtom = Atom(name: '_AtivoControllerBase.sorted');
+
+  @override
+  bool get sorted {
+    _$sortedAtom.reportRead();
+    return super.sorted;
+  }
+
+  @override
+  set sorted(bool value) {
+    _$sortedAtom.reportWrite(value, super.sorted, () {
+      super.sorted = value;
+    });
+  }
+
   final _$getAllAtivosAsyncAction =
       AsyncAction('_AtivoControllerBase.getAllAtivos');
 
@@ -86,11 +101,23 @@ mixin _$AtivoController on _AtivoControllerBase, Store {
   }
 
   @override
+  dynamic sortList() {
+    final _$actionInfo = _$_AtivoControllerBaseActionController.startAction(
+        name: '_AtivoControllerBase.sortList');
+    try {
+      return super.sortList();
+    } finally {
+      _$_AtivoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 ativos: ${ativos},
 filter: ${filter},
+sorted: ${sorted},
 listFiltered: ${listFiltered}
     ''';
   }

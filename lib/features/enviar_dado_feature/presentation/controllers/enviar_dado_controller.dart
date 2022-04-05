@@ -40,6 +40,9 @@ abstract class _EnviarDadoControllerBase with Store {
   DateTime currentUmidadeDate = DateTime.now();
 
   @observable
+  DateTime currentCoordenadaDate = DateTime.now();
+
+  @observable
   late Coordenada currentCoordenada;
 
   @action
@@ -60,6 +63,25 @@ abstract class _EnviarDadoControllerBase with Store {
   @action
   changeUmidadeDate(DateTime value) {
     currentUmidadeDate = value;
+  }
+
+  @action
+  changeCoordenadaDate(DateTime value) {
+    currentCoordenadaDate = value;
+  }
+
+  @action
+  getFocusedDay(String type) {
+    switch (type) {
+      case 'temperatura':
+        return focusedDayTemperatura;
+      case 'umidade':
+        return focusedDayUmidade;
+      case 'coordenada':
+        return focusedDayCoordenada;
+      default:
+        break;
+    }
   }
 
   //Table Calendar
@@ -92,9 +114,10 @@ abstract class _EnviarDadoControllerBase with Store {
   setSelectedDay(DateTime value, String type) {
     if (type == 'temperatura') {
       changeTemperaturaDate(value);
-    }
-    if (type == 'umidade') {
+    } else if (type == 'umidade') {
       changeUmidadeDate(value);
+    } else if (type == 'coordenada') {
+      changeCoordenadaDate(value);
     }
   }
 }

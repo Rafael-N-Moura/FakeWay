@@ -110,6 +110,7 @@ class DynamicEnviarDadoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EnviarDadoController controller = Modular.get<EnviarDadoController>();
     Completer<GoogleMapController> _controller = Completer();
     const CameraPosition _kGooglePlex = CameraPosition(
       target: LatLng(-8.0458197, -34.9464914),
@@ -176,7 +177,7 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                                     fontSize: 14),
                               ),
                               Text(
-                                '7',
+                                controller.currentAtivo!.sensorId.toString(),
                                 style: TextStyle(
                                     fontFamily: 'Sansation',
                                     color: WayColors.black,
@@ -213,14 +214,16 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14),
                               ),
-                              Text(
-                                '17/05/2021',
-                                style: TextStyle(
-                                    fontFamily: 'Sansation',
-                                    color: WayColors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16),
-                              ),
+                              Observer(builder: (_) {
+                                return Text(
+                                  "${controller.currentCoordenadaDate.day}/${controller.currentCoordenadaDate.month}/${controller.currentCoordenadaDate.year}",
+                                  style: TextStyle(
+                                      fontFamily: 'Sansation',
+                                      color: WayColors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16),
+                                );
+                              }),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -272,11 +275,19 @@ class CustomTableCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime focusedDay;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
       child: Observer(builder: (_) {
+        if (type == 'temperatura') {
+          focusedDay = controller.focusedDayTemperatura;
+        } else if (type == 'umidade') {
+          focusedDay = controller.focusedDayUmidade;
+        } else {
+          focusedDay = controller.focusedDayCoordenada;
+        }
         return TableCalendar(
-          focusedDay: DateTime.now(),
+          focusedDay: focusedDay,
           firstDay: DateTime.now().add(
             const Duration(days: -365),
           ),
@@ -284,15 +295,20 @@ class CustomTableCalendar extends StatelessWidget {
             const Duration(days: 365),
           ),
           onDaySelected: (selectedDay, focusedDay) {
-            //controller.setFocusedDay(focusedDay, widget.type);
+            controller.setFocusedDay(focusedDay, type);
             controller.setSelectedDay(selectedDay, type);
           },
           selectedDayPredicate: (day) {
-            return isSameDay(
-                type == "temperatura"
-                    ? controller.currentTemperaturaDate
-                    : controller.currentUmidadeDate,
-                day);
+            if (type == 'temperatura') {
+              return isSameDay(controller.currentTemperaturaDate, day);
+            } else if (type == 'umidade') {
+              return isSameDay(controller.currentUmidadeDate, day);
+            } else {
+              return isSameDay(controller.currentCoordenadaDate, day);
+            }
+          },
+          onPageChanged: (focusedDay) {
+            controller.setFocusedDay(focusedDay, type);
           },
         );
       }),

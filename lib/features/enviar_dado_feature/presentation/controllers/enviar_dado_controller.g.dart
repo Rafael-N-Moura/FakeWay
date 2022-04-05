@@ -90,6 +90,23 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
     });
   }
 
+  final _$currentCoordenadaDateAtom =
+      Atom(name: '_EnviarDadoControllerBase.currentCoordenadaDate');
+
+  @override
+  DateTime get currentCoordenadaDate {
+    _$currentCoordenadaDateAtom.reportRead();
+    return super.currentCoordenadaDate;
+  }
+
+  @override
+  set currentCoordenadaDate(DateTime value) {
+    _$currentCoordenadaDateAtom.reportWrite(value, super.currentCoordenadaDate,
+        () {
+      super.currentCoordenadaDate = value;
+    });
+  }
+
   final _$currentCoordenadaAtom =
       Atom(name: '_EnviarDadoControllerBase.currentCoordenada');
 
@@ -230,6 +247,28 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   }
 
   @override
+  dynamic changeCoordenadaDate(DateTime value) {
+    final _$actionInfo = _$_EnviarDadoControllerBaseActionController
+        .startAction(name: '_EnviarDadoControllerBase.changeCoordenadaDate');
+    try {
+      return super.changeCoordenadaDate(value);
+    } finally {
+      _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getFocusedDay(String type) {
+    final _$actionInfo = _$_EnviarDadoControllerBaseActionController
+        .startAction(name: '_EnviarDadoControllerBase.getFocusedDay');
+    try {
+      return super.getFocusedDay(type);
+    } finally {
+      _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setFocusedDay(DateTime value, String type) {
     final _$actionInfo = _$_EnviarDadoControllerBaseActionController
         .startAction(name: '_EnviarDadoControllerBase.setFocusedDay');
@@ -259,6 +298,7 @@ currentTemperatura: ${currentTemperatura},
 currentUmidade: ${currentUmidade},
 currentTemperaturaDate: ${currentTemperaturaDate},
 currentUmidadeDate: ${currentUmidadeDate},
+currentCoordenadaDate: ${currentCoordenadaDate},
 currentCoordenada: ${currentCoordenada},
 focusedDayTemperatura: ${focusedDayTemperatura},
 focusedDayUmidade: ${focusedDayUmidade},
