@@ -88,6 +88,7 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
               ]),
         ),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             StaticEnviarDadoPage(
               type: false,
@@ -420,6 +421,9 @@ class StaticEnviarDadoPage extends StatelessWidget {
             height: 50,
           ),
           const SendDataButtonWidget(),
+          const SizedBox(
+            height: 30,
+          )
         ],
       ),
     );
