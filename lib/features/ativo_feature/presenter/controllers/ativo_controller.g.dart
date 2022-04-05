@@ -9,6 +9,14 @@ part of 'ativo_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AtivoController on _AtivoControllerBase, Store {
+  Computed<List<Ativo>>? _$listFilteredComputed;
+
+  @override
+  List<Ativo> get listFiltered => (_$listFilteredComputed ??=
+          Computed<List<Ativo>>(() => super.listFiltered,
+              name: '_AtivoControllerBase.listFiltered'))
+      .value;
+
   final _$isLoadingAtom = Atom(name: '_AtivoControllerBase.isLoading');
 
   @override
@@ -39,6 +47,21 @@ mixin _$AtivoController on _AtivoControllerBase, Store {
     });
   }
 
+  final _$filterAtom = Atom(name: '_AtivoControllerBase.filter');
+
+  @override
+  String get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(String value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   final _$getAllAtivosAsyncAction =
       AsyncAction('_AtivoControllerBase.getAllAtivos');
 
@@ -48,11 +71,27 @@ mixin _$AtivoController on _AtivoControllerBase, Store {
         .run(() => super.getAllAtivos(idEstabelecimento));
   }
 
+  final _$_AtivoControllerBaseActionController =
+      ActionController(name: '_AtivoControllerBase');
+
+  @override
+  dynamic setFilter(String value) {
+    final _$actionInfo = _$_AtivoControllerBaseActionController.startAction(
+        name: '_AtivoControllerBase.setFilter');
+    try {
+      return super.setFilter(value);
+    } finally {
+      _$_AtivoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-ativos: ${ativos}
+ativos: ${ativos},
+filter: ${filter},
+listFiltered: ${listFiltered}
     ''';
   }
 }

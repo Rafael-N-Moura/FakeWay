@@ -28,44 +28,36 @@ class _EstabelecimentoPageState extends State<EstabelecimentoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(),
-      body: Column(
-        children: [
+        backgroundColor: Colors.white,
+        appBar: CustomAppBarWidget(),
+        body: Column(children: [
           FiltroEstabelecimentoWidget(controller: controller),
-          Observer(builder: (_) {
-            return controller.isLoading
-                ? Expanded(
-                    child: Container(
-                      color: WayColors.primaryLight,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: WayColors.primaryColor,
-                        ),
-                      ),
-                    ),
-                  )
-                : Expanded(
-                    child: Container(
-                      color: WayColors.primaryLight,
-                      child: ListView.builder(
-                        padding:
-                            const EdgeInsets.only(left: 24, right: 24, top: 24),
-                        itemCount: controller.listFiltered.length,
-                        itemBuilder: (_, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 24),
-                            child: EstabelecimentoCardWidget(
-                              estabelecimento: controller.listFiltered[index],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  );
-          }),
-        ],
-      ),
-    );
+          Expanded(
+              child: Container(
+                  color: WayColors.primaryLight,
+                  child: Observer(
+                    builder: (context) {
+                      return controller.isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: WayColors.primaryColor,
+                              ),
+                            )
+                          : ListView.builder(
+                              padding: const EdgeInsets.only(
+                                  left: 24, right: 24, top: 24),
+                              itemCount: controller.listFiltered.length,
+                              itemBuilder: (_, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 24),
+                                  child: EstabelecimentoCardWidget(
+                                    estabelecimento:
+                                        controller.listFiltered[index],
+                                  ),
+                                );
+                              });
+                    },
+                  )))
+        ]));
   }
 }

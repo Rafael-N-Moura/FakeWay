@@ -20,6 +20,20 @@ abstract class _AtivoControllerBase with Store {
   @observable
   ObservableList<Ativo> ativos = ObservableList<Ativo>();
 
+  @observable
+  String filter = "";
+
+  @computed
+  List<Ativo> get listFiltered {
+    if (filter.isEmpty) {
+      return ativos;
+    } else {
+      return ativos.where((item) {
+        return item.nome!.toLowerCase().contains(filter.toLowerCase());
+      }).toList();
+    }
+  }
+
   @action
   getAllAtivos(int idEstabelecimento) async {
     isLoading = true;
@@ -27,4 +41,7 @@ abstract class _AtivoControllerBase with Store {
     result.fold((l) => null, (sucess) => ativos = ObservableList.of(sucess));
     isLoading = false;
   }
+
+  @action
+  setFilter(String value) => filter = value;
 }

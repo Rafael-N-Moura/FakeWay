@@ -38,7 +38,7 @@ class _AtivoPageState extends State<AtivoPage> {
       appBar: CustomAtivoAppBarWidget(),
       body: Column(
         children: [
-          const FiltroAtivoWidget(),
+          FiltroAtivoWidget(controller: controller),
           Expanded(
             child: Container(
               color: WayColors.primaryLight,
@@ -52,12 +52,12 @@ class _AtivoPageState extends State<AtivoPage> {
                     : ListView.builder(
                         padding:
                             const EdgeInsets.only(left: 24, right: 24, top: 24),
-                        itemCount: controller.ativos.length,
+                        itemCount: controller.listFiltered.length,
                         itemBuilder: (_, index) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 24),
                             child: AtivoCardWidget(
-                              ativo: controller.ativos[index],
+                              ativo: controller.listFiltered[index],
                             ),
                           );
                         },
