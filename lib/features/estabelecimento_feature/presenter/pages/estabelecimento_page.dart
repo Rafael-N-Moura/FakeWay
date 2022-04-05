@@ -29,7 +29,7 @@ class _EstabelecimentoPageState extends State<EstabelecimentoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: CustomAppBarWidget(),
+        appBar: CustomAppBarWidget(controller: controller),
         body: Column(children: [
           FiltroEstabelecimentoWidget(controller: controller),
           Expanded(

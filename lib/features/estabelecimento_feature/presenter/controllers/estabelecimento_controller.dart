@@ -25,6 +25,9 @@ abstract class _EstabelecimentoControllerBase with Store {
   @observable
   String filter = "";
 
+  @observable
+  bool sorted = false;
+
   @computed
   List<Estabelecimento> get listFiltered {
     if (filter.isEmpty) {
@@ -48,4 +51,14 @@ abstract class _EstabelecimentoControllerBase with Store {
 
   @action
   setFilter(String value) => filter = value;
+
+  @action
+  sortList() {
+    listFiltered.sort(
+      (a, b) => sorted
+          ? a.companyName.compareTo(b.companyName)
+          : a.companyId.compareTo(b.companyId),
+    );
+    sorted = !sorted;
+  }
 }

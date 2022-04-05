@@ -35,7 +35,7 @@ class _AtivoPageState extends State<AtivoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAtivoAppBarWidget(),
+      appBar: CustomAtivoAppBarWidget(controller: controller),
       body: Column(
         children: [
           FiltroAtivoWidget(controller: controller),

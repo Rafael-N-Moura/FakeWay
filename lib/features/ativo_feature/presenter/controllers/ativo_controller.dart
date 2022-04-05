@@ -23,6 +23,9 @@ abstract class _AtivoControllerBase with Store {
   @observable
   String filter = "";
 
+  @observable
+  bool sorted = false;
+
   @computed
   List<Ativo> get listFiltered {
     if (filter.isEmpty) {
@@ -44,4 +47,16 @@ abstract class _AtivoControllerBase with Store {
 
   @action
   setFilter(String value) => filter = value;
+
+  @action
+  sortList() {
+    listFiltered.sort(
+      (a, b) {
+        return sorted && a.nome != null && b.nome != null
+            ? a.nome!.compareTo(b.nome!)
+            : b.nome!.compareTo(a.nome!);
+      },
+    );
+    sorted = !sorted;
+  }
 }

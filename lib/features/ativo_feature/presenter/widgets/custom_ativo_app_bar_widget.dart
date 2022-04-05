@@ -1,9 +1,11 @@
 import 'package:fake_way/core/utils/way_colors.dart';
+import 'package:fake_way/features/ativo_feature/presenter/controllers/ativo_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CustomAtivoAppBarWidget extends AppBar {
-  CustomAtivoAppBarWidget({Key? key})
+  final AtivoController controller;
+  CustomAtivoAppBarWidget({Key? key, required this.controller})
       : super(
           key: key,
           leading: InkWell(
@@ -29,7 +31,9 @@ class CustomAtivoAppBarWidget extends AppBar {
               fontFamily: "Raleway"),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.sortList();
+                },
                 icon: Icon(
                   Icons.segment,
                   color: WayColors.primaryColor,

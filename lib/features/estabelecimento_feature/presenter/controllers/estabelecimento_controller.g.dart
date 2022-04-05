@@ -64,6 +64,21 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
     });
   }
 
+  final _$sortedAtom = Atom(name: '_EstabelecimentoControllerBase.sorted');
+
+  @override
+  bool get sorted {
+    _$sortedAtom.reportRead();
+    return super.sorted;
+  }
+
+  @override
+  set sorted(bool value) {
+    _$sortedAtom.reportWrite(value, super.sorted, () {
+      super.sorted = value;
+    });
+  }
+
   final _$getAllEstabelecimentosAsyncAction =
       AsyncAction('_EstabelecimentoControllerBase.getAllEstabelecimentos');
 
@@ -88,11 +103,23 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
   }
 
   @override
+  dynamic sortList() {
+    final _$actionInfo = _$_EstabelecimentoControllerBaseActionController
+        .startAction(name: '_EstabelecimentoControllerBase.sortList');
+    try {
+      return super.sortList();
+    } finally {
+      _$_EstabelecimentoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 estabelecimentos: ${estabelecimentos},
 isLoading: ${isLoading},
 filter: ${filter},
+sorted: ${sorted},
 listFiltered: ${listFiltered}
     ''';
   }
