@@ -72,6 +72,23 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
     });
   }
 
+  final _$currentCoordenadaDateAtom =
+      Atom(name: '_EnviarDadoControllerBase.currentCoordenadaDate');
+
+  @override
+  DateTime get currentCoordenadaDate {
+    _$currentCoordenadaDateAtom.reportRead();
+    return super.currentCoordenadaDate;
+  }
+
+  @override
+  set currentCoordenadaDate(DateTime value) {
+    _$currentCoordenadaDateAtom.reportWrite(value, super.currentCoordenadaDate,
+        () {
+      super.currentCoordenadaDate = value;
+    });
+  }
+
   final _$currentTemperaturaAtom =
       Atom(name: '_EnviarDadoControllerBase.currentTemperatura');
 
@@ -85,22 +102,6 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   set currentTemperatura(double value) {
     _$currentTemperaturaAtom.reportWrite(value, super.currentTemperatura, () {
       super.currentTemperatura = value;
-    });
-  }
-
-  final _$currentUmidadeAtom =
-      Atom(name: '_EnviarDadoControllerBase.currentUmidade');
-
-  @override
-  double get currentUmidade {
-    _$currentUmidadeAtom.reportRead();
-    return super.currentUmidade;
-  }
-
-  @override
-  set currentUmidade(double value) {
-    _$currentUmidadeAtom.reportWrite(value, super.currentUmidade, () {
-      super.currentUmidade = value;
     });
   }
 
@@ -121,6 +122,22 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
     });
   }
 
+  final _$currentUmidadeAtom =
+      Atom(name: '_EnviarDadoControllerBase.currentUmidade');
+
+  @override
+  double get currentUmidade {
+    _$currentUmidadeAtom.reportRead();
+    return super.currentUmidade;
+  }
+
+  @override
+  set currentUmidade(double value) {
+    _$currentUmidadeAtom.reportWrite(value, super.currentUmidade, () {
+      super.currentUmidade = value;
+    });
+  }
+
   final _$currentUmidadeDateAtom =
       Atom(name: '_EnviarDadoControllerBase.currentUmidadeDate');
 
@@ -134,39 +151,6 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   set currentUmidadeDate(DateTime value) {
     _$currentUmidadeDateAtom.reportWrite(value, super.currentUmidadeDate, () {
       super.currentUmidadeDate = value;
-    });
-  }
-
-  final _$currentCoordenadaDateAtom =
-      Atom(name: '_EnviarDadoControllerBase.currentCoordenadaDate');
-
-  @override
-  DateTime get currentCoordenadaDate {
-    _$currentCoordenadaDateAtom.reportRead();
-    return super.currentCoordenadaDate;
-  }
-
-  @override
-  set currentCoordenadaDate(DateTime value) {
-    _$currentCoordenadaDateAtom.reportWrite(value, super.currentCoordenadaDate,
-        () {
-      super.currentCoordenadaDate = value;
-    });
-  }
-
-  final _$currentCoordenadaAtom =
-      Atom(name: '_EnviarDadoControllerBase.currentCoordenada');
-
-  @override
-  Coordenada get currentCoordenada {
-    _$currentCoordenadaAtom.reportRead();
-    return super.currentCoordenada;
-  }
-
-  @override
-  set currentCoordenada(Coordenada value) {
-    _$currentCoordenadaAtom.reportWrite(value, super.currentCoordenada, () {
-      super.currentCoordenada = value;
     });
   }
 
@@ -320,22 +304,22 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   }
 
   @override
-  dynamic increaseTemperatura(double value) {
+  dynamic changeCoordenadaDate(DateTime value) {
     final _$actionInfo = _$_EnviarDadoControllerBaseActionController
-        .startAction(name: '_EnviarDadoControllerBase.increaseTemperatura');
+        .startAction(name: '_EnviarDadoControllerBase.changeCoordenadaDate');
     try {
-      return super.increaseTemperatura(value);
+      return super.changeCoordenadaDate(value);
     } finally {
       _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic increaseUmidade(double value) {
+  dynamic increaseTemperatura(double value) {
     final _$actionInfo = _$_EnviarDadoControllerBaseActionController
-        .startAction(name: '_EnviarDadoControllerBase.increaseUmidade');
+        .startAction(name: '_EnviarDadoControllerBase.increaseTemperatura');
     try {
-      return super.increaseUmidade(value);
+      return super.increaseTemperatura(value);
     } finally {
       _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -353,22 +337,22 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   }
 
   @override
-  dynamic changeUmidadeDate(DateTime value) {
+  dynamic increaseUmidade(double value) {
     final _$actionInfo = _$_EnviarDadoControllerBaseActionController
-        .startAction(name: '_EnviarDadoControllerBase.changeUmidadeDate');
+        .startAction(name: '_EnviarDadoControllerBase.increaseUmidade');
     try {
-      return super.changeUmidadeDate(value);
+      return super.increaseUmidade(value);
     } finally {
       _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic changeCoordenadaDate(DateTime value) {
+  dynamic changeUmidadeDate(DateTime value) {
     final _$actionInfo = _$_EnviarDadoControllerBaseActionController
-        .startAction(name: '_EnviarDadoControllerBase.changeCoordenadaDate');
+        .startAction(name: '_EnviarDadoControllerBase.changeUmidadeDate');
     try {
-      return super.changeCoordenadaDate(value);
+      return super.changeUmidadeDate(value);
     } finally {
       _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -425,12 +409,11 @@ currentAtivo: ${currentAtivo},
 currentLatitude: ${currentLatitude},
 currentLongitude: ${currentLongitude},
 marcador: ${marcador},
-currentTemperatura: ${currentTemperatura},
-currentUmidade: ${currentUmidade},
-currentTemperaturaDate: ${currentTemperaturaDate},
-currentUmidadeDate: ${currentUmidadeDate},
 currentCoordenadaDate: ${currentCoordenadaDate},
-currentCoordenada: ${currentCoordenada},
+currentTemperatura: ${currentTemperatura},
+currentTemperaturaDate: ${currentTemperaturaDate},
+currentUmidade: ${currentUmidade},
+currentUmidadeDate: ${currentUmidadeDate},
 focusedDayTemperatura: ${focusedDayTemperatura},
 focusedDayUmidade: ${focusedDayUmidade},
 focusedDayCoordenada: ${focusedDayCoordenada},

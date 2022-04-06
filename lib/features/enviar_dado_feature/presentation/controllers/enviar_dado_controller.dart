@@ -27,6 +27,49 @@ abstract class _EnviarDadoControllerBase with Store {
     required this.sendCoordenadaUsecase,
   });
 
+  @observable
+  Ativo? currentAtivo;
+
+  @action
+  setCurrentAtivo(Ativo value) {
+    currentAtivo = value;
+  }
+
+  //Coordenada
+
+  @observable
+  double currentLatitude = 0;
+
+  @observable
+  double currentLongitude = 0;
+
+  @observable
+  Marker marcador = const Marker(markerId: MarkerId("Meu Ponto"));
+
+  @observable
+  DateTime currentCoordenadaDate = DateTime.now();
+
+  @action
+  changeLatitudeAndLongitude(double latitude, double longitude) {
+    currentLatitude = latitude;
+    currentLongitude = longitude;
+  }
+
+  @action
+  Marker getMarker() {
+    return marcador;
+  }
+
+  @action
+  setMarker(double lat, double long) {
+    marcador = Marker(markerId: marcador.mapsId, position: LatLng(lat, long));
+  }
+
+  @action
+  changeCoordenadaDate(DateTime value) {
+    currentCoordenadaDate = value;
+  }
+
   @action
   setInitialCoordenada(BuildContext context) async {
     bool serviceEnabled;
@@ -113,6 +156,24 @@ abstract class _EnviarDadoControllerBase with Store {
     );
   }
 
+  // Temperatura
+
+  @observable
+  double currentTemperatura = 0;
+
+  @observable
+  DateTime currentTemperaturaDate = DateTime.now();
+
+  @action
+  increaseTemperatura(double value) {
+    currentTemperatura += value;
+  }
+
+  @action
+  changeTemperaturaDate(DateTime value) {
+    currentTemperaturaDate = value;
+  }
+
   @action
   sendTemperaturaData(BuildContext context) async {
     final result = await sendTemperatureUsecase(
@@ -145,6 +206,19 @@ abstract class _EnviarDadoControllerBase with Store {
         ),
       ),
     );
+  }
+
+  //Umidade
+
+  @observable
+  double currentUmidade = 0;
+
+  @observable
+  DateTime currentUmidadeDate = DateTime.now();
+
+  @action
+  increaseUmidade(double value) {
+    currentUmidade += value;
   }
 
   @action
@@ -181,80 +255,9 @@ abstract class _EnviarDadoControllerBase with Store {
     );
   }
 
-  @observable
-  Ativo? currentAtivo;
-
-  @action
-  setCurrentAtivo(Ativo value) {
-    currentAtivo = value;
-  }
-
-  @observable
-  double currentLatitude = 0;
-
-  @observable
-  double currentLongitude = 0;
-
-  @observable
-  Marker marcador = const Marker(markerId: MarkerId("Meu Ponto"));
-
-  @observable
-  double currentTemperatura = 0;
-
-  @observable
-  double currentUmidade = 0;
-
-  @observable
-  DateTime currentTemperaturaDate = DateTime.now();
-
-  @observable
-  DateTime currentUmidadeDate = DateTime.now();
-
-  @observable
-  DateTime currentCoordenadaDate = DateTime.now();
-
-  @observable
-  late Coordenada currentCoordenada;
-
-  @action
-  changeLatitudeAndLongitude(double latitude, double longitude) {
-    currentLatitude = latitude;
-    currentLongitude = longitude;
-  }
-
-  @action
-  Marker getMarker() {
-    return marcador;
-  }
-
-  @action
-  setMarker(double lat, double long) {
-    marcador = Marker(markerId: marcador.mapsId, position: LatLng(lat, long));
-  }
-
-  @action
-  increaseTemperatura(double value) {
-    currentTemperatura += value;
-  }
-
-  @action
-  increaseUmidade(double value) {
-    currentUmidade += value;
-  }
-
-  @action
-  changeTemperaturaDate(DateTime value) {
-    currentTemperaturaDate = value;
-  }
-
   @action
   changeUmidadeDate(DateTime value) {
     currentUmidadeDate = value;
-  }
-
-  @action
-  changeCoordenadaDate(DateTime value) {
-    currentCoordenadaDate = value;
   }
 
   @action
