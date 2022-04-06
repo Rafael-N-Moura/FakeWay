@@ -1,3 +1,4 @@
+import 'package:fake_way/core/errors/exceptions.dart';
 import 'package:fake_way/core/http_client/http_client.dart';
 import 'package:dio/dio.dart';
 
@@ -6,8 +7,12 @@ class DioImplementation extends HttpClient {
 
   @override
   Future<HttpAnswer> get(String url) async {
-    final response = await client.get(url);
-    return HttpAnswer(data: response.data, statusCode: response.statusCode);
+    try {
+      final response = await client.get(url);
+      return HttpAnswer(data: response.data, statusCode: response.statusCode);
+    } catch (e) {
+      throw ServerException();
+    }
   }
 
   @override
@@ -20,7 +25,11 @@ class DioImplementation extends HttpClient {
 
   @override
   Future<HttpAnswer> put(String url, {required dynamic body}) async {
-    final response = await client.put(url, data: body);
-    return HttpAnswer(data: body, statusCode: response.statusCode);
+    try {
+      final response = await client.put(url, data: body);
+      return HttpAnswer(data: body, statusCode: response.statusCode);
+    } catch (e) {
+      throw ServerException();
+    }
   }
 }
