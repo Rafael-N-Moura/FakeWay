@@ -235,6 +235,24 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
     });
   }
 
+  final _$setInitialCoordenadaAsyncAction =
+      AsyncAction('_EnviarDadoControllerBase.setInitialCoordenada');
+
+  @override
+  Future setInitialCoordenada(BuildContext context) {
+    return _$setInitialCoordenadaAsyncAction
+        .run(() => super.setInitialCoordenada(context));
+  }
+
+  final _$sendCoordenadaDataAsyncAction =
+      AsyncAction('_EnviarDadoControllerBase.sendCoordenadaData');
+
+  @override
+  Future sendCoordenadaData(BuildContext context) {
+    return _$sendCoordenadaDataAsyncAction
+        .run(() => super.sendCoordenadaData(context));
+  }
+
   final _$sendTemperaturaDataAsyncAction =
       AsyncAction('_EnviarDadoControllerBase.sendTemperaturaData');
 

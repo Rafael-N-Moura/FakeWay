@@ -14,32 +14,18 @@ import '../widgets/send_data_button_widget.dart';
 import '../widgets/send_data_label_widget.dart';
 import '../widgets/value_picker_widget.dart';
 
-class EnviarDadoPage extends StatefulWidget {
+class EnviarDadoPage extends StatelessWidget {
   final Ativo ativo;
-  const EnviarDadoPage({Key? key, required this.ativo}) : super(key: key);
-
-  @override
-  State<EnviarDadoPage> createState() => _EnviarDadoPageState();
-}
-
-class _EnviarDadoPageState extends State<EnviarDadoPage> {
+  EnviarDadoPage({Key? key, required this.ativo}) : super(key: key);
   final EnviarDadoController controller = Modular.get<EnviarDadoController>();
 
   @override
-  void initState() {
-    controller.setCurrentAtivo(widget.ativo);
-    controller.setInitialCoordenada(context);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.clearControllerValues();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    controller.setCurrentAtivo(ativo);
+    controller.setInitialCoordenada(context);
+
+    controller.clearControllerValues();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -61,7 +47,7 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
             },
           ),
           title: Text(
-            widget.ativo.nome ?? "Ativo sem nome",
+            ativo.nome ?? "Ativo sem nome",
             style:
                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
           ),
@@ -111,16 +97,10 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
   }
 }
 
-class DynamicEnviarDadoPage extends StatefulWidget {
+class DynamicEnviarDadoPage extends StatelessWidget {
   const DynamicEnviarDadoPage({
     Key? key,
   }) : super(key: key);
-
-  @override
-  State<DynamicEnviarDadoPage> createState() => _DynamicEnviarDadoPageState();
-}
-
-class _DynamicEnviarDadoPageState extends State<DynamicEnviarDadoPage> {
   @override
   Widget build(BuildContext context) {
     final EnviarDadoController controller = Modular.get<EnviarDadoController>();
