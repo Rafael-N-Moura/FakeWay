@@ -23,12 +23,12 @@ void main() {
   test("should return a List of Ativos when calls the data source", () async {
     // Arrange
     when(() => dataSource.getAllAtivosByEstabelecimento(tEstabelecimentoId))
-        .thenAnswer((_) async => tAtivosList);
+        .thenAnswer((_) async => tAtivoModelList);
     // Act
     final result =
         await repository.getAllAtivosByEstabelecimento(tEstabelecimentoId);
     // Assert
-    expect(result, const Right(tAtivosList));
+    expect(result, const Right(tAtivoModelList));
     verify(() => dataSource.getAllAtivosByEstabelecimento(tEstabelecimentoId))
         .called(1);
   });

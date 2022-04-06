@@ -35,13 +35,13 @@ mixin _$AtivoController on _AtivoControllerBase, Store {
   final _$ativosAtom = Atom(name: '_AtivoControllerBase.ativos');
 
   @override
-  ObservableList<Ativo> get ativos {
+  List<Ativo>? get ativos {
     _$ativosAtom.reportRead();
     return super.ativos;
   }
 
   @override
-  set ativos(ObservableList<Ativo> value) {
+  set ativos(List<Ativo>? value) {
     _$ativosAtom.reportWrite(value, super.ativos, () {
       super.ativos = value;
     });

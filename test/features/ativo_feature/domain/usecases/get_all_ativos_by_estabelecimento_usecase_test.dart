@@ -22,11 +22,11 @@ void main() {
       'should get a list of ativos for a given estabelecimento id from the repository',
       () async {
     when(() => repository.getAllAtivosByEstabelecimento(tEstabelecimentoId))
-        .thenAnswer((_) async => const Right(tAtivosList));
+        .thenAnswer((_) async => const Right(tAtivoModelList));
 
     final result = await usecase(tEstabelecimentoId);
 
-    expect(result, const Right(tAtivosList));
+    expect(result, const Right(tAtivoModelList));
 
     verify(() => repository.getAllAtivosByEstabelecimento(tEstabelecimentoId))
         .called(1);

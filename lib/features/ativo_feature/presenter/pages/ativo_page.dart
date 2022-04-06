@@ -1,4 +1,5 @@
 import 'package:fake_way/core/utils/way_colors.dart';
+import 'package:fake_way/core/widgets/error_get_list_widget.dart';
 import 'package:fake_way/features/ativo_feature/presenter/controllers/ativo_controller.dart';
 import 'package:fake_way/features/ativo_feature/presenter/widgets/ativo_card_widget.dart';
 import 'package:fake_way/features/ativo_feature/presenter/widgets/custom_ativo_app_bar_widget.dart';
@@ -49,19 +50,24 @@ class _AtivoPageState extends State<AtivoPage> {
                           color: WayColors.primaryColor,
                         ),
                       )
-                    : ListView.builder(
-                        padding:
-                            const EdgeInsets.only(left: 24, right: 24, top: 24),
-                        itemCount: controller.listFiltered.length,
-                        itemBuilder: (_, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 24),
-                            child: AtivoCardWidget(
-                              ativo: controller.listFiltered[index],
-                            ),
+                    : controller.ativos == null
+                        ? const ErrorGetListWidget(
+                            textError:
+                                "Não foi possível carregar \na lista de Ativos!",
+                          )
+                        : ListView.builder(
+                            padding: const EdgeInsets.only(
+                                left: 24, right: 24, top: 24),
+                            itemCount: controller.listFiltered.length,
+                            itemBuilder: (_, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 24),
+                                child: AtivoCardWidget(
+                                  ativo: controller.listFiltered[index],
+                                ),
+                              );
+                            },
                           );
-                        },
-                      );
               }),
             ),
           ),
