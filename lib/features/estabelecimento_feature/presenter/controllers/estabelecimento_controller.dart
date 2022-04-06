@@ -16,8 +16,7 @@ abstract class _EstabelecimentoControllerBase with Store {
   });
 
   @observable
-  ObservableList<Estabelecimento> estabelecimentos =
-      ObservableList<Estabelecimento>();
+  List<Estabelecimento>? estabelecimentos;
 
   @observable
   bool isLoading = false;
@@ -31,9 +30,9 @@ abstract class _EstabelecimentoControllerBase with Store {
   @computed
   List<Estabelecimento> get listFiltered {
     if (filter.isEmpty) {
-      return estabelecimentos;
+      return estabelecimentos!;
     } else {
-      return estabelecimentos
+      return estabelecimentos!
           .where((item) =>
               item.companyName.toLowerCase().contains(filter.toLowerCase()))
           .toList();
@@ -44,8 +43,9 @@ abstract class _EstabelecimentoControllerBase with Store {
   getAllEstabelecimentos() async {
     isLoading = true;
     final result = await usecase(NoParams());
-    result.fold(
-        (l) => null, (sucess) => estabelecimentos = ObservableList.of(sucess));
+    result.fold((l) {
+      return estabelecimentos = null;
+    }, (sucess) => estabelecimentos = ObservableList.of(sucess));
     isLoading = false;
   }
 

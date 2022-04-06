@@ -8,7 +8,7 @@ import '../../../../mocks/estabelecimento_mock.dart';
 
 void main() {
   test("should be a subclass of EstabelecimentoEntity", () async {
-    expect(tEstabelecimentoMock, isA<Estabelecimento>());
+    expect(tEstabelecimentoModelMock, isA<Estabelecimento>());
   });
 
   test("should return a valid model", () {
@@ -19,6 +19,6 @@ void main() {
     final result = EstabelecimentoModel.fromJson(jsonMap);
 
     // Assert
-    expect(result, tEstabelecimentoMock);
+    expect(result, tEstabelecimentoModelMock);
   });
 }

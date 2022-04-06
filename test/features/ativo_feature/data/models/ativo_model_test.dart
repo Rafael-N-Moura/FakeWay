@@ -8,7 +8,7 @@ import '../../../../mocks/ativo_mock.dart';
 
 void main() {
   test("should be a subclass of AtivoEntity", () async {
-    expect(tAtivoMock, isA<Ativo>());
+    expect(tAtivoModelMock, isA<Ativo>());
   });
 
   test("should return a valid model", () {
@@ -19,6 +19,6 @@ void main() {
     final result = AtivoModel.fromJson(jsonMap);
 
     // Assert
-    expect(result, tAtivoMock);
+    expect(result, tAtivoModelMock);
   });
 }
