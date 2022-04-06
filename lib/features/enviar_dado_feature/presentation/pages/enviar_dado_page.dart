@@ -125,13 +125,21 @@ class DynamicEnviarDadoPage extends StatelessWidget {
     );
     return Stack(
       children: [
-        GoogleMap(
-          initialCameraPosition: _kGooglePlex,
-          mapType: MapType.normal,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-        ),
+        Observer(builder: (_) {
+          return GoogleMap(
+            markers: <Marker>{controller.marcador},
+            initialCameraPosition: _kGooglePlex,
+            mapType: MapType.normal,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            onLongPress: (values) {
+              controller.changeLatitudeAndLongitude(
+                  values.latitude, values.longitude);
+              controller.setMarker(values.latitude, values.longitude);
+            },
+          );
+        }),
         DraggableScrollableSheet(
           initialChildSize: 1,
           minChildSize: 0.4,
@@ -155,16 +163,38 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                     CustomTableCalendar(
                       type: 'coordenada',
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: TextField(
-                        decoration: InputDecoration(hintText: 'Latitude'),
-                      ),
+                          keyboardType: TextInputType.number,
+                          controller: TextEditingController(
+                              text: controller.currentLatitude.toString()),
+                          decoration:
+                              const InputDecoration(hintText: 'Latitude'),
+                          onChanged: (text) {
+                            if (text.isNotEmpty && text != "-") {
+                              controller.currentLatitude = double.parse(text);
+                              controller.setMarker(double.parse(text),
+                                  controller.getMarker().position.longitude);
+                            }
+                          }),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: TextField(
-                        decoration: InputDecoration(hintText: 'Longitude'),
+                        keyboardType: TextInputType.number,
+                        controller: TextEditingController(
+                            text: controller.currentLongitude.toString()),
+                        decoration:
+                            const InputDecoration(hintText: 'Longitude'),
+                        onChanged: (text) {
+                          if (text.isNotEmpty && text != "-") {
+                            controller.currentLongitude = double.parse(text);
+                            controller.setMarker(
+                                controller.getMarker().position.latitude,
+                                double.parse(text));
+                          }
+                        },
                       ),
                     ),
                     const SendDataLabelWidget(),
@@ -201,14 +231,16 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14),
                               ),
-                              Text(
-                                '-16.750296',
-                                style: TextStyle(
-                                    fontFamily: 'Sansation',
-                                    color: WayColors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16),
-                              ),
+                              Observer(builder: (_) {
+                                return Text(
+                                  controller.currentLatitude.toString(),
+                                  style: TextStyle(
+                                      fontFamily: 'Sansation',
+                                      color: WayColors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16),
+                                );
+                              }),
                             ],
                           ),
                           Column(
@@ -241,14 +273,16 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14),
                               ),
-                              Text(
-                                '-49.3423414',
-                                style: TextStyle(
-                                    fontFamily: 'Sansation',
-                                    color: WayColors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16),
-                              ),
+                              Observer(builder: (_) {
+                                return Text(
+                                  controller.currentLongitude.toString(),
+                                  style: TextStyle(
+                                      fontFamily: 'Sansation',
+                                      color: WayColors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16),
+                                );
+                              }),
                             ],
                           ),
                         ],
