@@ -19,7 +19,13 @@ class EnviarDadoRepositoryImplementation implements IEnviarDadoRepository {
   Future<Either<Failure, NoParams>> sendCoordenadaData(
       Coordenada coordenada) async {
     try {
-      await dataSource.sendCoordenadaData(coordenada as CoordenadaModel);
+      await dataSource.sendCoordenadaData(CoordenadaModel(
+          dispositivoId: coordenada.dispositivoId,
+          sensorId: coordenada.sensorId,
+          data: coordenada.data,
+          latitude: coordenada.latitude,
+          longitude: coordenada.longitude,
+          velocidade: coordenada.velocidade));
       return Right(NoParams());
     } on ServerException {
       return Left(ServerFailure());

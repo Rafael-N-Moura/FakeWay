@@ -16,6 +16,7 @@ import 'core/http_client/dio_implementation.dart';
 import 'core/http_client/http_client.dart';
 import 'features/ativo_feature/ativo_module.dart';
 import 'features/ativo_feature/presenter/controllers/ativo_controller.dart';
+import 'features/enviar_dado_feature/domain/usecases/send_coordenada_data_usecase.dart';
 import 'features/enviar_dado_feature/enviar_dado_module.dart';
 import 'features/enviar_dado_feature/presentation/controllers/enviar_dado_controller.dart';
 
@@ -45,9 +46,12 @@ class AppModule extends Module {
 
         //Enviar Dado Feature
         Bind.singleton(((i) => EnviarDadoController(
-            sendTemperatureUsecase: i(), sendUmidadeUsecase: i()))),
+            sendTemperatureUsecase: i(),
+            sendUmidadeUsecase: i(),
+            sendCoordenadaUsecase: i()))),
         Bind(((i) => SendTemperatureData(i()))),
         Bind(((i) => SendUmidadeDataUsecase(i()))),
+        Bind(((i) => SendCoordenadaData(i()))),
         Bind((i) => EnviarDadoRepositoryImplementation(i())),
         Bind(
           (i) => DataSourceImplementation(i()),
