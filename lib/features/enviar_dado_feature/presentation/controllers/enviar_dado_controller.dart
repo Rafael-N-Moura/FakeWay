@@ -73,9 +73,11 @@ abstract class _EnviarDadoControllerBase with Store {
       );
     }
 
-    Position initalPosition = await Geolocator.getCurrentPosition();
-    currentLatitude = initalPosition.latitude;
-    currentLongitude = initalPosition.longitude;
+    if (serviceEnabled && permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse) {
+      await Geolocator.getCurrentPosition().then((value) =>
+          changeLatitudeAndLongitude(value.latitude, value.longitude));
+    }
   }
 
   @action

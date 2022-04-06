@@ -6,32 +6,18 @@ import '../../../../core/utils/way_colors.dart';
 import '../../../ativo_feature/domain/entities/ativo_entity.dart';
 import '../controllers/enviar_dado_controller.dart';
 
-class EnviarDadoPage extends StatefulWidget {
+class EnviarDadoPage extends StatelessWidget {
   final Ativo ativo;
-  const EnviarDadoPage({Key? key, required this.ativo}) : super(key: key);
-
-  @override
-  State<EnviarDadoPage> createState() => _EnviarDadoPageState();
-}
-
-class _EnviarDadoPageState extends State<EnviarDadoPage> {
+  EnviarDadoPage({Key? key, required this.ativo}) : super(key: key);
   final EnviarDadoController controller = Modular.get<EnviarDadoController>();
 
   @override
-  void initState() {
-    controller.setCurrentAtivo(widget.ativo);
-    controller.setInitialCoordenada(context);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.clearControllerValues();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    controller.setCurrentAtivo(ativo);
+    controller.setInitialCoordenada(context);
+
+    controller.clearControllerValues();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -53,7 +39,7 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
             },
           ),
           title: Text(
-            widget.ativo.nome ?? "Ativo sem nome",
+            ativo.nome ?? "Ativo sem nome",
             style:
                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
           ),
