@@ -13,8 +13,9 @@ class DataSourceImplementation implements IDataSource {
   DataSourceImplementation(this.client);
   @override
   Future sendCoordenadaData(CoordenadaModel coordenada) async {
-    final data = coordenada.toMap();
-    final response = await client.put(CoordinateEndpoint.api(), body: data);
+    final response = await client.put(CoordinateEndpoint.api(), body: [
+      coordenada.toMap(),
+    ]);
     if (response.statusCode == 200) {
     } else {
       return ServerException();
@@ -23,8 +24,12 @@ class DataSourceImplementation implements IDataSource {
 
   @override
   Future sendTemperatureData(TemperaturaModel temperatura) async {
-    final data = temperatura.toMap();
-    final response = await client.put(TemperatureEndpoint.api(), body: data);
+    final response = await client.put(
+      TemperatureEndpoint.api(),
+      body: [
+        temperatura.toMap(),
+      ],
+    );
     if (response.statusCode == 200) {
     } else {
       return ServerException();
@@ -33,8 +38,8 @@ class DataSourceImplementation implements IDataSource {
 
   @override
   Future sendUmidadeData(UmidadeModel umidade) async {
-    final data = umidade.toMap();
-    final response = await client.put(HumidityEndpoint.api(), body: data);
+    final response =
+        await client.put(HumidityEndpoint.api(), body: [umidade.toMap()]);
     if (response.statusCode == 200) {
     } else {
       return ServerException();

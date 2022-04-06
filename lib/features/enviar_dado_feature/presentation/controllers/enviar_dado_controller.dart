@@ -1,3 +1,6 @@
+import 'package:fake_way/features/enviar_dado_feature/domain/entities/temperatura_entity.dart';
+import 'package:fake_way/features/enviar_dado_feature/domain/entities/umidade_entity.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:fake_way/features/enviar_dado_feature/domain/entities/coordenada_entity.dart';
 import 'package:fake_way/features/enviar_dado_feature/domain/usecases/send_temperature_data_usecase.dart';
@@ -18,6 +21,74 @@ abstract class _EnviarDadoControllerBase with Store {
     required this.sendTemperatureUsecase,
     required this.sendUmidadeUsecase,
   });
+
+  @action
+  sendTemperaturaData(BuildContext context) async {
+    final result = await sendTemperatureUsecase(
+      Temperatura(
+        dispositivoId: currentAtivo!.dispotividoId,
+        sensorId: currentAtivo!.sensorId,
+        data: currentTemperaturaDate,
+        temperatura: currentTemperatura,
+      ),
+    );
+    result.fold(
+      (l) => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Center(
+            child: Text(
+              "Não foi possível enviar os dados",
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+      (r) => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(
+            "Dados de Temperatura enviados com sucesso",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @action
+  sendUmidadeaData(BuildContext context) async {
+    final result = await sendUmidadeUsecase(
+      Umidade(
+        dispositivoId: currentAtivo!.dispotividoId,
+        sensorId: currentAtivo!.sensorId,
+        data: currentUmidadeDate,
+        umidade: currentUmidade,
+      ),
+    );
+    result.fold(
+      (l) => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Center(
+            child: Text(
+              "Não foi possível enviar os dados",
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+      (r) => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(
+            "Dados de Umidade enviados com sucesso",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
 
   @observable
   Ativo? currentAtivo;
@@ -119,5 +190,14 @@ abstract class _EnviarDadoControllerBase with Store {
     } else if (type == 'coordenada') {
       changeCoordenadaDate(value);
     }
+  }
+
+  @action
+  clearControllerValues() {
+    currentTemperatura = 0;
+    currentUmidade = 0;
+    currentTemperaturaDate = DateTime.now();
+    currentUmidadeDate = DateTime.now();
+    currentCoordenadaDate = DateTime.now();
   }
 }

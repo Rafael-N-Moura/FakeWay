@@ -19,8 +19,7 @@ class DioImplementation extends HttpClient {
   }
 
   @override
-  Future<HttpAnswer> put(String url,
-      {required Map<String, dynamic> body}) async {
+  Future<HttpAnswer> put(String url, {required dynamic body}) async {
     final response = await client.put(url, data: body);
     return HttpAnswer(data: body, statusCode: response.statusCode);
   }

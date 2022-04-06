@@ -30,7 +30,11 @@ class EnviarDadoRepositoryImplementation implements IEnviarDadoRepository {
   Future<Either<Failure, NoParams>> sendTemperatureData(
       Temperatura temperatura) async {
     try {
-      await dataSource.sendTemperatureData(temperatura as TemperaturaModel);
+      await dataSource.sendTemperatureData(TemperaturaModel(
+          dispositivoId: temperatura.dispositivoId,
+          sensorId: temperatura.sensorId,
+          data: temperatura.data,
+          temperatura: temperatura.temperatura));
       return Right(NoParams());
     } on ServerException {
       return Left(ServerFailure());
@@ -40,7 +44,11 @@ class EnviarDadoRepositoryImplementation implements IEnviarDadoRepository {
   @override
   Future<Either<Failure, NoParams>> sendUmidadeData(Umidade umidade) async {
     try {
-      await dataSource.sendUmidadeData(umidade as UmidadeModel);
+      await dataSource.sendUmidadeData(UmidadeModel(
+          dispositivoId: umidade.dispositivoId,
+          sensorId: umidade.sensorId,
+          data: umidade.data,
+          umidade: umidade.umidade));
       return Right(NoParams());
     } on ServerException {
       return Left(ServerFailure());

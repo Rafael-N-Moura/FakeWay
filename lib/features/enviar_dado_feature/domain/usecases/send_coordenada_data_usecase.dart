@@ -1,12 +1,11 @@
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
-import 'package:fake_way/features/enviar_dato_feature.dart/data/models/coordenata_model.dart';
-import 'package:fake_way/features/enviar_dato_feature.dart/domain/repositories/enviar_dado_repository.dart';
 
+import '../../../enviar_dado_feature./domain/repositories/enviar_dado_repository.dart';
 import '../entities/coordenada_entity.dart';
 
-class SendCoordenadaData implements UseCase<NoParams, CoordenadaModel> {
+class SendCoordenadaData implements UseCase<NoParams, Coordenada> {
   final IEnviarDadoRepository repository;
 
   SendCoordenadaData(this.repository);

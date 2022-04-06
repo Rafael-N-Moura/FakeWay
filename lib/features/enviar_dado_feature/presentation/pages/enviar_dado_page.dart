@@ -32,6 +32,12 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
   }
 
   @override
+  void dispose() {
+    controller.clearControllerValues();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
@@ -251,7 +257,9 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    const SendDataButtonWidget(),
+                    SendDataButtonWidget(
+                      function: () {},
+                    ),
                     const SizedBox(
                       height: 30,
                     ),
@@ -288,6 +296,7 @@ class CustomTableCalendar extends StatelessWidget {
           focusedDay = controller.focusedDayCoordenada;
         }
         return TableCalendar(
+          locale: 'pt_BR',
           focusedDay: focusedDay,
           firstDay: DateTime.now().add(
             const Duration(days: -365),
@@ -420,7 +429,11 @@ class StaticEnviarDadoPage extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          const SendDataButtonWidget(),
+          SendDataButtonWidget(
+            function: type
+                ? () => controller.sendUmidadeaData(context)
+                : () => controller.sendTemperaturaData(context),
+          ),
           const SizedBox(
             height: 30,
           )
