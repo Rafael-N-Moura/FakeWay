@@ -1,6 +1,8 @@
 import 'package:fake_way/features/enviar_dado_feature/domain/entities/temperatura_entity.dart';
 import 'package:fake_way/features/enviar_dado_feature/domain/entities/umidade_entity.dart';
+import 'package:fake_way/features/enviar_dado_feature/domain/usecases/send_coordenada_data_usecase.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobx/mobx.dart';
 import 'package:fake_way/features/enviar_dado_feature/domain/entities/coordenada_entity.dart';
@@ -17,11 +19,97 @@ class EnviarDadoController = _EnviarDadoControllerBase
 abstract class _EnviarDadoControllerBase with Store {
   final SendTemperatureData sendTemperatureUsecase;
   final SendUmidadeDataUsecase sendUmidadeUsecase;
+  final SendCoordenadaData sendCoordenadaUsecase;
 
   _EnviarDadoControllerBase({
     required this.sendTemperatureUsecase,
     required this.sendUmidadeUsecase,
+    required this.sendCoordenadaUsecase,
   });
+
+  @action
+  setInitialCoordenada(BuildContext context) async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            "O GPS está desativado",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              "Permissão para ter acesso à localização não concedida",
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            "Permissão negada para sempre",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+
+    Position initalPosition = await Geolocator.getCurrentPosition();
+    currentLatitude = initalPosition.latitude;
+    currentLongitude = initalPosition.longitude;
+  }
+
+  @action
+  sendCoordenadaData(BuildContext context) async {
+    final result = await sendCoordenadaUsecase(Coordenada(
+        dispositivoId: currentAtivo!.dispotividoId,
+        sensorId: currentAtivo!.sensorId,
+        data: currentCoordenadaDate,
+        latitude: currentLatitude,
+        longitude: currentLongitude,
+        velocidade: 0));
+    result.fold(
+      (l) => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Center(
+            child: Text(
+              "Não foi possível enviar os dados",
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+      (r) => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(
+            "Dados de Coordenada enviados com sucesso",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
 
   @action
   sendTemperaturaData(BuildContext context) async {

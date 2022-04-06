@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:fake_way/core/errors/failures.dart';
 import 'package:fake_way/core/usecases/usecase.dart';
-import 'package:fake_way/features/enviar_dado_feature./domain/repositories/enviar_dado_repository.dart';
+import 'package:fake_way/features/enviar_dado_feature/domain/repositories/enviar_dado_repository.dart';
+
 import 'package:fake_way/features/enviar_dado_feature/domain/usecases/send_coordenada_data_usecase.dart';
 
 import 'package:flutter_test/flutter_test.dart';

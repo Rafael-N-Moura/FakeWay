@@ -28,6 +28,7 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
   @override
   void initState() {
     controller.setCurrentAtivo(widget.ativo);
+    controller.setInitialCoordenada(context);
     super.initState();
   }
 
@@ -110,17 +111,22 @@ class _EnviarDadoPageState extends State<EnviarDadoPage> {
   }
 }
 
-class DynamicEnviarDadoPage extends StatelessWidget {
+class DynamicEnviarDadoPage extends StatefulWidget {
   const DynamicEnviarDadoPage({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<DynamicEnviarDadoPage> createState() => _DynamicEnviarDadoPageState();
+}
+
+class _DynamicEnviarDadoPageState extends State<DynamicEnviarDadoPage> {
+  @override
   Widget build(BuildContext context) {
     final EnviarDadoController controller = Modular.get<EnviarDadoController>();
     Completer<GoogleMapController> _controller = Completer();
-    const CameraPosition _kGooglePlex = CameraPosition(
-      target: LatLng(-8.0458197, -34.9464914),
+    CameraPosition _kGooglePlex = CameraPosition(
+      target: LatLng(controller.currentLatitude, controller.currentLongitude),
       zoom: 14.4746,
     );
     return Stack(
@@ -168,7 +174,8 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                       child: TextField(
                           keyboardType: TextInputType.number,
                           controller: TextEditingController(
-                              text: controller.currentLatitude.toString()),
+                            text: controller.currentLatitude.toStringAsFixed(6),
+                          ),
                           decoration:
                               const InputDecoration(hintText: 'Latitude'),
                           onChanged: (text) {
@@ -184,7 +191,8 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                       child: TextField(
                         keyboardType: TextInputType.number,
                         controller: TextEditingController(
-                            text: controller.currentLongitude.toString()),
+                          text: controller.currentLongitude.toStringAsFixed(6),
+                        ),
                         decoration:
                             const InputDecoration(hintText: 'Longitude'),
                         onChanged: (text) {
@@ -233,7 +241,7 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                               ),
                               Observer(builder: (_) {
                                 return Text(
-                                  controller.currentLatitude.toString(),
+                                  controller.currentLatitude.toStringAsFixed(6),
                                   style: TextStyle(
                                       fontFamily: 'Sansation',
                                       color: WayColors.black,
@@ -273,16 +281,19 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14),
                               ),
-                              Observer(builder: (_) {
-                                return Text(
-                                  controller.currentLongitude.toString(),
-                                  style: TextStyle(
-                                      fontFamily: 'Sansation',
-                                      color: WayColors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                );
-                              }),
+                              Observer(
+                                builder: (_) {
+                                  return Text(
+                                    controller.currentLongitude
+                                        .toStringAsFixed(6),
+                                    style: TextStyle(
+                                        fontFamily: 'Sansation',
+                                        color: WayColors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ],
@@ -292,7 +303,7 @@ class DynamicEnviarDadoPage extends StatelessWidget {
                       height: 30,
                     ),
                     SendDataButtonWidget(
-                      function: () {},
+                      function: () => controller.sendCoordenadaData(context),
                     ),
                     const SizedBox(
                       height: 30,
@@ -330,6 +341,7 @@ class CustomTableCalendar extends StatelessWidget {
           focusedDay = controller.focusedDayCoordenada;
         }
         return TableCalendar(
+          onFormatChanged: (format) {},
           locale: 'pt_BR',
           focusedDay: focusedDay,
           firstDay: DateTime.now().add(
@@ -414,9 +426,10 @@ class StaticEnviarDadoPage extends StatelessWidget {
                     Text(
                       'Data',
                       style: TextStyle(
-                          color: WayColors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
+                        color: WayColors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
                     ),
                     Observer(builder: (_) {
                       return Text(
