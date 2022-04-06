@@ -19,7 +19,7 @@ const tAtivoJsonMock = """
 """;
 
 const tAtivoMock = AtivoModel(
-    estabelecimento: tEstabelecimentoMock,
+    estabelecimento: tEstabelecimentoModelMock,
     sensorId: 1,
     dispotividoId: 1,
     nome: "nome",

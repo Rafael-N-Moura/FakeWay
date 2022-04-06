@@ -235,6 +235,24 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
     });
   }
 
+  final _$sendTemperaturaDataAsyncAction =
+      AsyncAction('_EnviarDadoControllerBase.sendTemperaturaData');
+
+  @override
+  Future sendTemperaturaData(BuildContext context) {
+    return _$sendTemperaturaDataAsyncAction
+        .run(() => super.sendTemperaturaData(context));
+  }
+
+  final _$sendUmidadeaDataAsyncAction =
+      AsyncAction('_EnviarDadoControllerBase.sendUmidadeaData');
+
+  @override
+  Future sendUmidadeaData(BuildContext context) {
+    return _$sendUmidadeaDataAsyncAction
+        .run(() => super.sendUmidadeaData(context));
+  }
+
   final _$_EnviarDadoControllerBaseActionController =
       ActionController(name: '_EnviarDadoControllerBase');
 
@@ -366,6 +384,17 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
         .startAction(name: '_EnviarDadoControllerBase.setSelectedDay');
     try {
       return super.setSelectedDay(value, type);
+    } finally {
+      _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic clearControllerValues() {
+    final _$actionInfo = _$_EnviarDadoControllerBaseActionController
+        .startAction(name: '_EnviarDadoControllerBase.clearControllerValues');
+    try {
+      return super.clearControllerValues();
     } finally {
       _$_EnviarDadoControllerBaseActionController.endAction(_$actionInfo);
     }

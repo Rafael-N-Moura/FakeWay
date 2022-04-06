@@ -21,13 +21,13 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
       Atom(name: '_EstabelecimentoControllerBase.estabelecimentos');
 
   @override
-  ObservableList<Estabelecimento> get estabelecimentos {
+  List<Estabelecimento>? get estabelecimentos {
     _$estabelecimentosAtom.reportRead();
     return super.estabelecimentos;
   }
 
   @override
-  set estabelecimentos(ObservableList<Estabelecimento> value) {
+  set estabelecimentos(List<Estabelecimento>? value) {
     _$estabelecimentosAtom.reportWrite(value, super.estabelecimentos, () {
       super.estabelecimentos = value;
     });
