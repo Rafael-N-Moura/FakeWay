@@ -56,7 +56,6 @@ abstract class _HistoricoControllerBase with Store {
       historico = ObservableList.of(sucess);
     });
     isLoading = false;
-    print(historico);
   }
 
   @action
