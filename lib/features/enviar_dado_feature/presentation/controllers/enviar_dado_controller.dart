@@ -165,6 +165,11 @@ abstract class _EnviarDadoControllerBase with Store {
   DateTime currentTemperaturaDate = DateTime.now();
 
   @action
+  Future<void> setCurrentTemperatura(double value) async {
+    currentTemperatura = value;
+  }
+
+  @action
   increaseTemperatura(double value) {
     currentTemperatura += value;
   }
@@ -217,8 +222,18 @@ abstract class _EnviarDadoControllerBase with Store {
   DateTime currentUmidadeDate = DateTime.now();
 
   @action
+  Future<void> setCurrentUmidade(double value) async {
+    currentUmidade = value;
+  }
+
+  @action
   increaseUmidade(double value) {
-    currentUmidade += value;
+    if ((currentUmidade == 0 && value < 0) ||
+        (currentUmidade == 0.5 && value == -1)) {
+      currentUmidade = 0;
+    } else {
+      currentUmidade += value;
+    }
   }
 
   @action
@@ -288,7 +303,7 @@ abstract class _EnviarDadoControllerBase with Store {
   DateTime selectedDay = DateTime.now();
 
   @action
-  setFocusedDay(DateTime value, String type) {
+  void setFocusedDay(DateTime value, String type) {
     if (type == 'temperatura') {
       focusedDayTemperatura = value;
     }

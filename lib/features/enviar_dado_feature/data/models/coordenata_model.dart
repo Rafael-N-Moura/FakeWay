@@ -1,7 +1,11 @@
 import 'dart:convert';
 
 import 'package:fake_way/features/enviar_dado_feature/domain/entities/coordenada_entity.dart';
+import 'package:hive/hive.dart';
 
+part 'coordenata_model.g.dart';
+
+@HiveType(typeId: 3)
 class CoordenadaModel extends Coordenada {
   const CoordenadaModel(
       {required int dispositivoId,

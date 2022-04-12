@@ -1,7 +1,11 @@
 import 'package:fake_way/features/estabelecimento_feature/data/models/estabelecimento_model.dart';
 import 'package:fake_way/features/ativo_feature/domain/entities/ativo_entity.dart';
 import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
+import 'package:hive/hive.dart';
 
+part 'ativo_model.g.dart';
+
+@HiveType(typeId: 2)
 class AtivoModel extends Ativo {
   const AtivoModel(
       {required Estabelecimento estabelecimento,

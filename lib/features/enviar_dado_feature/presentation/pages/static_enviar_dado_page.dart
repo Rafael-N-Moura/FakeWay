@@ -1,8 +1,12 @@
+import 'package:fake_way/features/enviar_dado_feature/domain/entities/temperatura_entity.dart';
+import 'package:fake_way/features/enviar_dado_feature/domain/entities/umidade_entity.dart';
+import 'package:fake_way/features/historico_feature/domain/entities/historico_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/utils/way_colors.dart';
+import '../../../historico_feature/presentation/controllers/historico_controller.dart';
 import '../controllers/enviar_dado_controller.dart';
 import '../widgets/custom_table_calendar.dart';
 import '../widgets/send_data_button_widget.dart';
@@ -20,6 +24,8 @@ class StaticEnviarDadoPage extends StatelessWidget {
   final bool type;
 
   final EnviarDadoController controller = Modular.get<EnviarDadoController>();
+  final HistoricoController historicoController =
+      Modular.get<HistoricoController>();
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +121,36 @@ class StaticEnviarDadoPage extends StatelessWidget {
           ),
           SendDataButtonWidget(
             function: type
-                ? () => controller.sendUmidadeaData(context)
-                : () => controller.sendTemperaturaData(context),
+                ? () {
+                    controller.sendUmidadeaData(context);
+                    historicoController.storeHistorico(
+                      HistoricoEntity(
+                        ativo: controller.currentAtivo!,
+                        type: 'Umidade',
+                        umidade: Umidade(
+                          dispositivoId: controller.currentAtivo!.dispotividoId,
+                          sensorId: controller.currentAtivo!.sensorId,
+                          data: controller.currentUmidadeDate,
+                          umidade: controller.currentUmidade,
+                        ),
+                      ),
+                    );
+                  }
+                : () {
+                    controller.sendTemperaturaData(context);
+                    historicoController.storeHistorico(
+                      HistoricoEntity(
+                        ativo: controller.currentAtivo!,
+                        type: 'Temperatura',
+                        temperatura: Temperatura(
+                          dispositivoId: controller.currentAtivo!.dispotividoId,
+                          sensorId: controller.currentAtivo!.sensorId,
+                          data: controller.currentTemperaturaDate,
+                          temperatura: controller.currentTemperatura,
+                        ),
+                      ),
+                    );
+                  },
           ),
           const SizedBox(
             height: 30,

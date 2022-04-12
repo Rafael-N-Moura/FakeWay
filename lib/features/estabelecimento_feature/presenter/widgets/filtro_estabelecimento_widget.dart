@@ -20,13 +20,14 @@ class FiltroEstabelecimentoWidget extends StatelessWidget {
           onChanged: controller.setFilter,
           textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
-              prefixIcon: Icon(
-                Icons.search,
-                color: WayColors.grey,
-              ),
-              hintText: "Procurar empresa",
-              hintStyle: TextStyle(color: WayColors.grey),
-              border: InputBorder.none),
+            prefixIcon: Icon(
+              Icons.search,
+              color: WayColors.grey,
+            ),
+            hintText: "Procurar empresa",
+            hintStyle: TextStyle(color: WayColors.grey),
+            border: InputBorder.none,
+          ),
         ),
       ),
     );

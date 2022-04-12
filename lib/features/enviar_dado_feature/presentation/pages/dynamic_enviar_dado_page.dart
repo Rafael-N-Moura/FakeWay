@@ -1,3 +1,5 @@
+import 'package:fake_way/features/enviar_dado_feature/domain/entities/coordenada_entity.dart';
+import 'package:fake_way/features/historico_feature/domain/entities/historico_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -5,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 
 import '../../../../core/utils/way_colors.dart';
+import '../../../historico_feature/presentation/controllers/historico_controller.dart';
 import '../controllers/enviar_dado_controller.dart';
 import '../widgets/custom_table_calendar.dart';
 import '../widgets/scroll_indicator_widget.dart';
@@ -24,6 +27,8 @@ class _DynamicEnviarDadoPageState extends State<DynamicEnviarDadoPage> {
   @override
   Widget build(BuildContext context) {
     final EnviarDadoController controller = Modular.get<EnviarDadoController>();
+    final HistoricoController historicoController =
+        Modular.get<HistoricoController>();
     Completer<GoogleMapController> _controller = Completer();
     CameraPosition _kGooglePlex = CameraPosition(
       target: LatLng(controller.currentLatitude, controller.currentLongitude),
@@ -72,19 +77,19 @@ class _DynamicEnviarDadoPageState extends State<DynamicEnviarDadoPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: TextField(
-                          keyboardType: TextInputType.number,
-                          controller: TextEditingController(
-                            text: controller.currentLatitude.toStringAsFixed(6),
-                          ),
-                          decoration:
-                              const InputDecoration(hintText: 'Latitude'),
-                          onChanged: (text) {
-                            if (text.isNotEmpty && text != "-") {
-                              controller.currentLatitude = double.parse(text);
-                              controller.setMarker(double.parse(text),
-                                  controller.getMarker().position.longitude);
-                            }
-                          }),
+                        keyboardType: TextInputType.number,
+                        controller: TextEditingController(
+                          text: controller.currentLatitude.toStringAsFixed(6),
+                        ),
+                        decoration: const InputDecoration(hintText: 'Latitude'),
+                        onChanged: (text) {
+                          if (text.isNotEmpty && text != "-") {
+                            controller.currentLatitude = double.parse(text);
+                            controller.setMarker(double.parse(text),
+                                controller.getMarker().position.longitude);
+                          }
+                        },
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -202,9 +207,24 @@ class _DynamicEnviarDadoPageState extends State<DynamicEnviarDadoPage> {
                     const SizedBox(
                       height: 30,
                     ),
-                    SendDataButtonWidget(
-                      function: () => controller.sendCoordenadaData(context),
-                    ),
+                    SendDataButtonWidget(function: () {
+                      controller.sendCoordenadaData(context);
+                      historicoController.storeHistorico(
+                        HistoricoEntity(
+                          ativo: controller.currentAtivo!,
+                          type: 'Coordenada',
+                          coordenada: Coordenada(
+                            dispositivoId:
+                                controller.currentAtivo!.dispotividoId,
+                            sensorId: controller.currentAtivo!.sensorId,
+                            data: controller.currentCoordenadaDate,
+                            latitude: controller.currentLatitude,
+                            longitude: controller.currentLongitude,
+                            velocidade: 0,
+                          ),
+                        ),
+                      );
+                    }),
                     const SizedBox(
                       height: 30,
                     ),

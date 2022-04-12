@@ -79,6 +79,22 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
     });
   }
 
+  final _$favoritesOnAtom =
+      Atom(name: '_EstabelecimentoControllerBase.favoritesOn');
+
+  @override
+  bool get favoritesOn {
+    _$favoritesOnAtom.reportRead();
+    return super.favoritesOn;
+  }
+
+  @override
+  set favoritesOn(bool value) {
+    _$favoritesOnAtom.reportWrite(value, super.favoritesOn, () {
+      super.favoritesOn = value;
+    });
+  }
+
   final _$getAllEstabelecimentosAsyncAction =
       AsyncAction('_EstabelecimentoControllerBase.getAllEstabelecimentos');
 
@@ -86,6 +102,44 @@ mixin _$EstabelecimentoController on _EstabelecimentoControllerBase, Store {
   Future getAllEstabelecimentos() {
     return _$getAllEstabelecimentosAsyncAction
         .run(() => super.getAllEstabelecimentos());
+  }
+
+  final _$setAFavoriteEstabelecimentoAsyncAction =
+      AsyncAction('_EstabelecimentoControllerBase.setAFavoriteEstabelecimento');
+
+  @override
+  Future<void> setAFavoriteEstabelecimento(
+      Estabelecimento estabelecimento, BuildContext context) {
+    return _$setAFavoriteEstabelecimentoAsyncAction
+        .run(() => super.setAFavoriteEstabelecimento(estabelecimento, context));
+  }
+
+  final _$removeAFavoriteEstabelecimentoAsyncAction = AsyncAction(
+      '_EstabelecimentoControllerBase.removeAFavoriteEstabelecimento');
+
+  @override
+  Future<void> removeAFavoriteEstabelecimento(
+      int companyId, BuildContext context) {
+    return _$removeAFavoriteEstabelecimentoAsyncAction
+        .run(() => super.removeAFavoriteEstabelecimento(companyId, context));
+  }
+
+  final _$getStatusOfFavoriteEstabelecimentoAsyncAction = AsyncAction(
+      '_EstabelecimentoControllerBase.getStatusOfFavoriteEstabelecimento');
+
+  @override
+  Future<bool?> getStatusOfFavoriteEstabelecimento(int companyId) {
+    return _$getStatusOfFavoriteEstabelecimentoAsyncAction
+        .run(() => super.getStatusOfFavoriteEstabelecimento(companyId));
+  }
+
+  final _$getAllFavoritesEstabelecimentosAsyncAction = AsyncAction(
+      '_EstabelecimentoControllerBase.getAllFavoritesEstabelecimentos');
+
+  @override
+  Future<void> getAllFavoritesEstabelecimentos() {
+    return _$getAllFavoritesEstabelecimentosAsyncAction
+        .run(() => super.getAllFavoritesEstabelecimentos());
   }
 
   final _$_EstabelecimentoControllerBaseActionController =
@@ -120,6 +174,7 @@ estabelecimentos: ${estabelecimentos},
 isLoading: ${isLoading},
 filter: ${filter},
 sorted: ${sorted},
+favoritesOn: ${favoritesOn},
 listFiltered: ${listFiltered}
     ''';
   }

@@ -1,7 +1,12 @@
 import 'dart:convert';
 
+import 'package:hive/hive.dart';
+
 import '../../domain/entities/temperatura_entity.dart';
 
+part 'temperatura_model.g.dart';
+
+@HiveType(typeId: 4)
 class TemperaturaModel extends Temperatura {
   const TemperaturaModel(
       {required int dispositivoId,

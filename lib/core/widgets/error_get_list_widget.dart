@@ -1,3 +1,4 @@
+import 'package:fake_way/core/utils/way_colors.dart';
 import 'package:flutter/material.dart';
 
 class ErrorGetListWidget extends StatelessWidget {
@@ -11,18 +12,20 @@ class ErrorGetListWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Icon(
-          Icons.error,
-          color: Colors.redAccent,
-          size: 64,
+        Image.asset(
+          'assets/images/network_error.png',
+          height: 200,
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
         Text(
           textError,
-          style:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: WayColors.primaryColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
           textAlign: TextAlign.center,
         ),
       ],

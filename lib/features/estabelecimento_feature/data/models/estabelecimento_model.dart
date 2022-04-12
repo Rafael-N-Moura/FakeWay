@@ -1,5 +1,9 @@
 import 'package:fake_way/features/estabelecimento_feature/domain/entities/estabelecimento_entity.dart';
+import 'package:hive/hive.dart';
 
+part 'estabelecimento_model.g.dart';
+
+@HiveType(typeId: 0)
 class EstabelecimentoModel extends Estabelecimento {
   const EstabelecimentoModel({
     required int companyId,

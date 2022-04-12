@@ -20,16 +20,16 @@ class EnviarDadoModule extends Module {
 
   @override
   List<Bind<Object>> get binds => [
-        Bind.singleton(((i) => EnviarDadoController(
-            sendTemperatureUsecase: i(),
-            sendUmidadeUsecase: i(),
-            sendCoordenadaUsecase: i()))),
-        Bind(((i) => SendTemperatureData(i()))),
-        Bind(((i) => SendUmidadeDataUsecase(i()))),
-        Bind(((i) => SendCoordenadaData(i()))),
-        Bind((i) => EnviarDadoRepositoryImplementation(i())),
-        Bind(
-          (i) => DataSourceImplementation(i()),
-        ),
+        Bind.singleton(
+            ((i) => EnviarDadoController(
+                sendTemperatureUsecase: i(),
+                sendUmidadeUsecase: i(),
+                sendCoordenadaUsecase: i())),
+            export: true),
+        Bind(((i) => SendTemperatureData(i())), export: true),
+        Bind(((i) => SendUmidadeDataUsecase(i())), export: true),
+        Bind(((i) => SendCoordenadaData(i())), export: true),
+        Bind((i) => EnviarDadoRepositoryImplementation(i()), export: true),
+        Bind((i) => DataSourceImplementation(i()), export: true),
       ];
 }

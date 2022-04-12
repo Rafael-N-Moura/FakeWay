@@ -237,6 +237,15 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
         .run(() => super.sendCoordenadaData(context));
   }
 
+  final _$setCurrentTemperaturaAsyncAction =
+      AsyncAction('_EnviarDadoControllerBase.setCurrentTemperatura');
+
+  @override
+  Future<void> setCurrentTemperatura(double value) {
+    return _$setCurrentTemperaturaAsyncAction
+        .run(() => super.setCurrentTemperatura(value));
+  }
+
   final _$sendTemperaturaDataAsyncAction =
       AsyncAction('_EnviarDadoControllerBase.sendTemperaturaData');
 
@@ -244,6 +253,15 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   Future sendTemperaturaData(BuildContext context) {
     return _$sendTemperaturaDataAsyncAction
         .run(() => super.sendTemperaturaData(context));
+  }
+
+  final _$setCurrentUmidadeAsyncAction =
+      AsyncAction('_EnviarDadoControllerBase.setCurrentUmidade');
+
+  @override
+  Future<void> setCurrentUmidade(double value) {
+    return _$setCurrentUmidadeAsyncAction
+        .run(() => super.setCurrentUmidade(value));
   }
 
   final _$sendUmidadeaDataAsyncAction =
@@ -370,7 +388,7 @@ mixin _$EnviarDadoController on _EnviarDadoControllerBase, Store {
   }
 
   @override
-  dynamic setFocusedDay(DateTime value, String type) {
+  void setFocusedDay(DateTime value, String type) {
     final _$actionInfo = _$_EnviarDadoControllerBaseActionController
         .startAction(name: '_EnviarDadoControllerBase.setFocusedDay');
     try {

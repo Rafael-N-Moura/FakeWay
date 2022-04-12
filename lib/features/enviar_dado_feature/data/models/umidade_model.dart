@@ -1,7 +1,12 @@
 import 'dart:convert';
 
+import 'package:hive/hive.dart';
+
 import '../../domain/entities/umidade_entity.dart';
 
+part 'umidade_model.g.dart';
+
+@HiveType(typeId: 5)
 class UmidadeModel extends Umidade {
   const UmidadeModel(
       {required int dispositivoId,
